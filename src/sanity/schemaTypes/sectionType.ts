@@ -41,10 +41,11 @@ export const sectionType = defineType({
                 name: 'render_as',
                 title: 'Render As',
                 type: 'string',
+                initialValue: 'cards',
                 options: {
                     list: [
                         {title: 'Cards', value: 'cards'},
-                        {title: 'Slider', value: 'slider'}
+                        {title: 'Slider', value: 'slider'},
                     ]
                 }
             },
@@ -52,7 +53,20 @@ export const sectionType = defineType({
                 name: 'content_blocks',
                 title: 'Content Blocks',
                 type: 'array',
-                of: [defineArrayMember({type: 'reference', to: {type: 'content'}})]
+                of: [defineArrayMember({
+                    type: 'object',
+                    name: 'content_block',
+                    title: 'Content Block',
+                    fields: [{
+                        name: 'content',
+                        type: 'blockContent',
+                    }],
+                    preview: {
+                        select: {
+                            title: 'content'
+                        }
+                    }
+                })]
             }
         ]
     }),
@@ -60,7 +74,21 @@ export const sectionType = defineType({
       name: 'ctas',
       title: 'CTAs',
       type: 'array',
-      of: [defineArrayMember({type: 'reference', to: {type: 'cta'}})],
+      of: [defineArrayMember({
+        type: 'object',
+        name: 'cta',
+        title: 'CTA',
+        fields: [
+            {
+                name: 'text',
+                type: 'string'
+            },
+            {
+                name: 'link',
+                type: 'url'
+            }
+        ]
+    })],
     }),
     defineField({
       name: 'publishedAt',
