@@ -44,7 +44,7 @@ export const FormContext = createContext<FormContext>({
         people: '',
         items: '',
         storage_size: '',
-        moveType: '',
+        move_type: '',
         date: '',
         user_name: '',
         user_email: '',
@@ -82,7 +82,10 @@ const stepsMap = (answers: Record<number, string>): Record<number, number | (()=
 export const FormProvider: FC<FormProviderProps> = ({ children, steps }) => {
     const [id, setId] = useState(1)
     const currentStep = steps.find(step => step.id === id)!
-    const [answers, setAnswer] = useState<Record<number, string>>({})
+    const initialAddress = {from: sessionStorage.getItem('address_from'), to: sessionStorage.getItem('address_to')}
+    const [answers, setAnswer] = useState<Record<number, string>>({
+        0: JSON.stringify(initialAddress)
+    })
     const getNextId = (id: number) => {
         const nextId = stepsMap(answers)[id]
         return typeof nextId === 'number' ? nextId : nextId()
@@ -99,7 +102,9 @@ export const FormProvider: FC<FormProviderProps> = ({ children, steps }) => {
         currentStep,
         answer: (data: string) => {
             saveAnswer(data)
-            setId(getNextId(id))
+            if (id !== 9) {
+                setId(getNextId(id))
+            }
         },
         submitAnswers: () => {},
         getLead: () => ({
@@ -111,7 +116,7 @@ export const FormProvider: FC<FormProviderProps> = ({ children, steps }) => {
             people: answers[4],
             items: answers[5],
             storage_size: answers[6],
-            moveType: answers[7],
+            move_type: answers[7],
             date: answers[8],
             user_name: JSON.parse(answers[0]).name,
             user_email: JSON.parse(answers[0]).email,

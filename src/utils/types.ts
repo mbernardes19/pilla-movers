@@ -7,7 +7,7 @@ export type Lead = {
     people: string
     items: string
     storage_size: string
-    moveType: string
+    move_type: string
     date: string
     user_name: string
     user_email: string

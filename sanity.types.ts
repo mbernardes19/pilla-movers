@@ -120,8 +120,10 @@ export type Form = {
         _type: "image";
       };
       label?: string;
+      _type: "option";
       _key: string;
     }>;
+    _type: "step";
     _key: string;
   }>;
 };
@@ -326,11 +328,10 @@ export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/app/page.tsx
 // Variable: query3
-// Query: *[_type == "page" && slug.current == $slug][0]{        title,        hero->{            title,            headline,            subheadline        },        sections[]->{            title,            headline,            subheadline,            content{                content_blocks[]            },            ctas[]{                text,                link,                icon            }        }    }
+// Query: *[_type == "page" && slug.current == $slug][0]{        title,        hero->{            headline,            subheadline        },        sections[]->{            title,            headline,            subheadline,            content{                content_blocks[]            },            ctas[]{                text,                link,                icon            }        }    }
 export type Query3Result = {
   title: null;
   hero: {
-    title: string | null;
     headline: string | null;
     subheadline: string | null;
   } | null;
@@ -446,7 +447,7 @@ export type Query1Result = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"page\" && slug.current == $slug][0]{\n        title,\n        hero->{\n            title,\n            headline,\n            subheadline\n        },\n        sections[]->{\n            title,\n            headline,\n            subheadline,\n            content{\n                content_blocks[]\n            },\n            ctas[]{\n                text,\n                link,\n                icon\n            }\n        }\n    }": Query3Result;
+    "*[_type == \"page\" && slug.current == $slug][0]{\n        title,\n        hero->{\n            headline,\n            subheadline\n        },\n        sections[]->{\n            title,\n            headline,\n            subheadline,\n            content{\n                content_blocks[]\n            },\n            ctas[]{\n                text,\n                link,\n                icon\n            }\n        }\n    }": Query3Result;
     "*[_id == \"77c1f585-4392-491a-8f21-babe79ed6dfa\"][0]{\n      steps[]{\n        id,\n        next,\n        question,\n        options[]{\n            icon{\n                asset->{\n                    url\n                }\n            },\n            label\n        }\n      }\n    }": Query1Result;
   }
 }

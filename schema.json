@@ -704,6 +704,13 @@
                           "type": "string"
                         },
                         "optional": true
+                      },
+                      "_type": {
+                        "type": "objectAttribute",
+                        "value": {
+                          "type": "string",
+                          "value": "option"
+                        }
                       }
                     },
                     "rest": {
@@ -720,6 +727,13 @@
                   }
                 },
                 "optional": true
+              },
+              "_type": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string",
+                  "value": "step"
+                }
               }
             },
             "rest": {
