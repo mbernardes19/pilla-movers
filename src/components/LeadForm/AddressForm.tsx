@@ -10,9 +10,11 @@ export const AddressForm = () => {
     const [address, setAddress] = useState({from: '', to: ''})
 
     const saveAddresses = () => {
-        sessionStorage.setItem('address_from', address.from)
-        sessionStorage.setItem('address_to', address.to)
-        push('/get-a-quote')
+        if (typeof window !== 'undefined') {
+            sessionStorage.setItem('address_from', address.from)
+            sessionStorage.setItem('address_to', address.to)
+            push('/get-a-quote')
+        }
     }
 
     return (

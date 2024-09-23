@@ -82,7 +82,7 @@ const stepsMap = (answers: Record<number, string>): Record<number, number | (()=
 export const FormProvider: FC<FormProviderProps> = ({ children, steps }) => {
     const [id, setId] = useState(1)
     const currentStep = steps.find(step => step.id === id)!
-    const initialAddress = {from: sessionStorage.getItem('address_from'), to: sessionStorage.getItem('address_to')}
+    const initialAddress = typeof window !== 'undefined' ? {from: sessionStorage.getItem('address_from'), to: sessionStorage.getItem('address_to')} : {}
     const [answers, setAnswer] = useState<Record<number, string>>({
         0: JSON.stringify(initialAddress)
     })
