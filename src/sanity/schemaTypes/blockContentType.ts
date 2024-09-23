@@ -1,4 +1,4 @@
-import {defineType, defineArrayMember} from 'sanity'
+import {defineType} from 'sanity'
 import {ImageIcon} from '@sanity/icons'
 
 /**
@@ -17,7 +17,7 @@ export const blockContentType = defineType({
   name: 'blockContent',
   type: 'array',
   of: [
-    defineArrayMember({
+    {
       type: 'block',
       // Styles let you define what blocks can be marked up as. The default
       // set corresponds with HTML tags, but you can set any title or value
@@ -56,11 +56,11 @@ export const blockContentType = defineType({
           },
         ],
       },
-    }),
+    },
     // You can add additional types here. Note that you can't use
     // primitive types such as 'string' and 'number' in the same array
     // as a block type.
-    defineArrayMember({
+    {
       type: 'image',
       icon: ImageIcon,
       options: {hotspot: true},
@@ -71,6 +71,6 @@ export const blockContentType = defineType({
           title: 'Alternative Text',
         }
       ]
-    }),
+    },
   ],
 })

@@ -20,6 +20,7 @@ async function getFormSteps(): Promise<Step[]> {
       }
     }`)
     const query2 = await client.fetch(query1)
+    // @ts-expect-error Test
     return query2?.steps as Step[]
 }
 

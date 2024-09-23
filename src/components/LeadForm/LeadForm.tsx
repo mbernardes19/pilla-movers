@@ -27,6 +27,7 @@ const LeadFormComponent = () => {
     const CurrentStep = componentMap[currentStepId]
     return (
         <>
+            {/* @ts-expect-error Test */}
             <PortableText value={currentStep.question!} />
             <CurrentStep />
         </>

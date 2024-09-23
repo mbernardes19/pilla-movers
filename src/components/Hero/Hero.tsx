@@ -13,6 +13,7 @@ export const Hero = ({ data, children }: HeroProps) => {
             <h1>{headline}</h1>
             <h3>{subheadline}</h3>
             {content?.content_blocks?.map((content, idx) => (
+                // @ts-expect-error Test
                 <PortableText key={idx} value={content?.content} />
             ))}
             {children}

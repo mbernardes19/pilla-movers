@@ -7,7 +7,7 @@ export const UserInfoInput = () => {
 
     return (
         <>
-            <form onSubmit={(e, data) => {
+            <form onSubmit={(e) => {
                 e.preventDefault()
                 submitLead(getLead())
             }}>

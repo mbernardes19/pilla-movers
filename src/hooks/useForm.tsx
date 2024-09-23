@@ -1,6 +1,6 @@
 'use client'
 
-import { ComponentType, createContext, Dispatch, FC, ReactElement, SetStateAction, useContext, useState } from "react";
+import { createContext, Dispatch, FC, ReactElement, SetStateAction, useContext, useState } from "react";
 import { ImageAsset } from "sanity";
 import { BlockContent } from "../../sanity.types";
 import { Lead } from "@/utils/types";

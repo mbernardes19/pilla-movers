@@ -4,7 +4,6 @@ import Image from "next/image";
 export async function generateStaticParams() {
     const query = `*[_type == "page"]{ "slug": slug.current }`
     const slugs = await client.fetch(query)
-    console.log('=== slugs', slugs)
    
     return slugs.map((slug: { slug: string; }) => ({
         slug: slug.slug,

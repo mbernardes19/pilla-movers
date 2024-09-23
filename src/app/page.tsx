@@ -3,6 +3,8 @@ import { AddressForm } from "@/components/LeadForm/AddressForm";
 import { Section } from "@/components/Section/Section";
 import { client } from "@/sanity/lib/client";
 import { defineQuery } from "next-sanity";
+import { Key } from "react";
+import { Section as SectionType } from "../../sanity.types";
 
 async function getPageBySlug(slug: string) {
     const query3 = defineQuery(`*[_type == "page" && slug.current == $slug][0]{
@@ -37,7 +39,7 @@ export default async function Home() {
                 <AddressForm />
             </Hero>
             <Section data={pageData.sections[0]} />
-            {pageData.sections.map((section, idx) => (
+            {pageData.sections.map((section: SectionType, idx: Key | null | undefined) => (
                 <Section key={idx} data={section} />
             ))}
         </>
