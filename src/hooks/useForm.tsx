@@ -3,6 +3,7 @@
 import { ComponentType, createContext, Dispatch, FC, ReactElement, SetStateAction, useContext, useState } from "react";
 import { ImageAsset } from "sanity";
 import { BlockContent } from "../../sanity.types";
+import { Lead } from "@/utils/types";
 
 export type Step = {
     id?: number;
@@ -22,6 +23,7 @@ type FormContext = {
     currentStep: Step
     answer: (data: string) => void
     submitAnswers: () => void
+    getLead: () => Lead
 }
 
 export const FormContext = createContext<FormContext>({
@@ -32,7 +34,22 @@ export const FormContext = createContext<FormContext>({
         options: undefined
     },
     answer: () => '',
-    submitAnswers: () => ''
+    submitAnswers: () => '',
+    getLead: () => ({
+        from: '',
+        to: '',
+        venue_from: '',
+        venue_to: '',
+        bedrooms: '',
+        people: '',
+        items: '',
+        storage_size: '',
+        moveType: '',
+        date: '',
+        user_name: '',
+        user_email: '',
+        user_phone: ''
+    })
 })
 
 export type FormProviderProps = {
@@ -62,13 +79,6 @@ const stepsMap = (answers: Record<number, string>): Record<number, number | (()=
     8: 9
 })
 
-// const componentMap: Record<number, ComponentType> = {
-//     1: MultipleOptions,
-//     2: MultipleOptions,
-//     8: DateInput,
-//     9: UserInfoInput
-// }
-
 export const FormProvider: FC<FormProviderProps> = ({ children, steps }) => {
     const [id, setId] = useState(1)
     const currentStep = steps.find(step => step.id === id)!
@@ -91,7 +101,22 @@ export const FormProvider: FC<FormProviderProps> = ({ children, steps }) => {
             saveAnswer(data)
             setId(getNextId(id))
         },
-        submitAnswers: () => {}
+        submitAnswers: () => {},
+        getLead: () => ({
+            from: JSON.parse(answers[0]).from,
+            to: JSON.parse(answers[0]).to,
+            venue_from: answers[1],
+            venue_to: answers[2],
+            bedrooms: answers[3],
+            people: answers[4],
+            items: answers[5],
+            storage_size: answers[6],
+            moveType: answers[7],
+            date: answers[8],
+            user_name: JSON.parse(answers[0]).name,
+            user_email: JSON.parse(answers[0]).email,
+            user_phone: JSON.parse(answers[0]).phone,
+        })
     }
 
     return (

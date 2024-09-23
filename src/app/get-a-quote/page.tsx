@@ -25,6 +25,7 @@ async function getFormSteps(): Promise<Step[]> {
 
 export default async function GetAQuote() {
     const steps = await getFormSteps()
+    
     return (
         <div>
             <LeadForm steps={steps} />

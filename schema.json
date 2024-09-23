@@ -360,7 +360,7 @@
           "type": "string"
         }
       },
-      "title": {
+      "internal_title": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
@@ -466,10 +466,6 @@
                                 {
                                   "type": "string",
                                   "value": "blockquote"
-                                },
-                                {
-                                  "type": "string",
-                                  "value": "span"
                                 }
                               ]
                             },
@@ -778,7 +774,7 @@
           "type": "string"
         }
       },
-      "title": {
+      "internal_title": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
@@ -790,6 +786,36 @@
         "value": {
           "type": "inline",
           "name": "slug"
+        },
+        "optional": true
+      },
+      "hero": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "object",
+          "attributes": {
+            "_ref": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              }
+            },
+            "_type": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string",
+                "value": "reference"
+              }
+            },
+            "_weak": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "boolean"
+              },
+              "optional": true
+            }
+          },
+          "dereferencesTo": "section"
         },
         "optional": true
       },
@@ -903,6 +929,13 @@
         "value": {
           "type": "string"
         }
+      },
+      "internal_title": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
       },
       "title": {
         "type": "objectAttribute",
@@ -1108,10 +1141,6 @@
                                       {
                                         "type": "string",
                                         "value": "blockquote"
-                                      },
-                                      {
-                                        "type": "string",
-                                        "value": "span"
                                       }
                                     ]
                                   },
@@ -1323,6 +1352,68 @@
                 },
                 "optional": true
               },
+              "icon": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "object",
+                  "attributes": {
+                    "asset": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "object",
+                        "attributes": {
+                          "_ref": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string"
+                            }
+                          },
+                          "_type": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string",
+                              "value": "reference"
+                            }
+                          },
+                          "_weak": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "boolean"
+                            },
+                            "optional": true
+                          }
+                        },
+                        "dereferencesTo": "sanity.imageAsset"
+                      },
+                      "optional": true
+                    },
+                    "hotspot": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "inline",
+                        "name": "sanity.imageHotspot"
+                      },
+                      "optional": true
+                    },
+                    "crop": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "inline",
+                        "name": "sanity.imageCrop"
+                      },
+                      "optional": true
+                    },
+                    "_type": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string",
+                        "value": "image"
+                      }
+                    }
+                  }
+                },
+                "optional": true
+              },
               "_type": {
                 "type": "objectAttribute",
                 "value": {
@@ -1441,10 +1532,6 @@
                     {
                       "type": "string",
                       "value": "blockquote"
-                    },
-                    {
-                      "type": "string",
-                      "value": "span"
                     }
                   ]
                 },

@@ -2,18 +2,33 @@
 'use client'
 
 import { FormProvider, Step, useForm } from "@/hooks/useForm"
+import { ComponentType } from "react"
+import { MultipleOptions } from "./MultipleOptions/MultipleOptions"
+import { DateInput } from "./DateInput/DateInput"
+import { UserInfoInput } from "./UserInfoInput/UserInfoInput"
+import { PortableText } from "next-sanity"
+import { SuccessScreen } from "./SuccessScreen/SuccessScreen"
+
+const componentMap: Record<number, ComponentType> = {
+    1: MultipleOptions,
+    2: MultipleOptions,
+    3: MultipleOptions,
+    4: MultipleOptions,
+    5: MultipleOptions,
+    6: MultipleOptions,
+    7: MultipleOptions,
+    8: DateInput,
+    9: UserInfoInput,
+    10: SuccessScreen
+}
 
 const LeadFormComponent = () => {
-    const { currentStep, answer } = useForm()
-    console.log('=== steps lead form', currentStep)
+    const { currentStepId, currentStep } = useForm()
+    const CurrentStep = componentMap[currentStepId]
     return (
         <>
-            {currentStep.options?.map(((option, idx) => (
-                <button key={idx} className="bg-blue inline-block p-3" onClick={() => answer(option.label!)}>
-                    <img src={option.icon?.asset.url} className="w-[60px] h-[60px]" alt="" />
-                    <span>{option.label}</span>
-                </button>
-            )))}
+            <PortableText value={currentStep.question!} />
+            <CurrentStep />
         </>
     )
 }

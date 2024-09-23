@@ -8,6 +8,11 @@ export const sectionType = defineType({
   icon: BlockElementIcon,
   fields: [
     defineField({
+        name: 'internal_title',
+        title: 'Internal Title',
+        type: 'string',
+      }),
+    defineField({
         name: 'title',
         type: 'string',
       }),
@@ -85,7 +90,14 @@ export const sectionType = defineType({
             },
             {
                 name: 'link',
-                type: 'url'
+                type: 'url',
+                validation: (Rule) => Rule.uri({
+                    allowRelative: true
+                })
+            },
+            {
+                name: 'icon',
+                type: 'image'
             }
         ]
     })],
@@ -97,7 +109,7 @@ export const sectionType = defineType({
   ],
   preview: {
     select: {
-        title: 'title',
+        title: 'internal_title',
         subtitle: 'headline'
     }
   },

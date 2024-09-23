@@ -74,7 +74,7 @@ export type Form = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
+  internal_title?: string;
   steps?: Array<{
     id?: number;
     question?: Array<{
@@ -84,7 +84,7 @@ export type Form = {
         _type: "span";
         _key: string;
       }>;
-      style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote" | "span";
+      style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
       listItem?: "bullet";
       markDefs?: Array<{
         href?: string;
@@ -132,8 +132,14 @@ export type Page = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
+  internal_title?: string;
   slug?: Slug;
+  hero?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "section";
+  };
   sections?: Array<{
     _ref: string;
     _type: "reference";
@@ -155,6 +161,7 @@ export type Section = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  internal_title?: string;
   title?: string;
   headline?: string;
   subheadline?: string;
@@ -180,7 +187,7 @@ export type Section = {
           _type: "span";
           _key: string;
         }>;
-        style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote" | "span";
+        style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
         listItem?: "bullet";
         markDefs?: Array<{
           href?: string;
@@ -210,6 +217,17 @@ export type Section = {
   ctas?: Array<{
     text?: string;
     link?: string;
+    icon?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
     _type: "cta";
     _key: string;
   }>;
@@ -223,7 +241,7 @@ export type BlockContent = Array<{
     _type: "span";
     _key: string;
   }>;
-  style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote" | "span";
+  style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
   listItem?: "bullet";
   markDefs?: Array<{
     href?: string;
@@ -306,6 +324,74 @@ export type SanityImageMetadata = {
 
 export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Form | Page | Slug | Section | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
+// Source: ./src/app/page.tsx
+// Variable: query3
+// Query: *[_type == "page" && slug.current == $slug][0]{        title,        hero->{            title,            headline,            subheadline        },        sections[]->{            title,            headline,            subheadline,            content{                content_blocks[]            },            ctas[]{                text,                link,                icon            }        }    }
+export type Query3Result = {
+  title: null;
+  hero: {
+    title: string | null;
+    headline: string | null;
+    subheadline: string | null;
+  } | null;
+  sections: Array<{
+    title: string | null;
+    headline: string | null;
+    subheadline: string | null;
+    content: {
+      content_blocks: Array<{
+        content?: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+          listItem?: "bullet";
+          markDefs?: Array<{
+            href?: string;
+            _type: "link";
+            _key: string;
+          }>;
+          level?: number;
+          _type: "block";
+          _key: string;
+        } | {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          alt?: string;
+          _type: "image";
+          _key: string;
+        }>;
+        _type: "content_block";
+        _key: string;
+      }> | null;
+    } | null;
+    ctas: Array<{
+      text: string | null;
+      link: string | null;
+      icon: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | null;
+    }> | null;
+  }> | null;
+} | null;
+
 // Source: ./src/app/get-a-quote/page.tsx
 // Variable: query1
 // Query: *[_id == "77c1f585-4392-491a-8f21-babe79ed6dfa"][0]{      steps[]{        id,        next,        question,        options[]{            icon{                asset->{                    url                }            },            label        }      }    }
@@ -322,7 +408,7 @@ export type Query1Result = {
         _type: "span";
         _key: string;
       }>;
-      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal" | "span";
+      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
       listItem?: "bullet";
       markDefs?: Array<{
         href?: string;
@@ -360,6 +446,7 @@ export type Query1Result = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
+    "*[_type == \"page\" && slug.current == $slug][0]{\n        title,\n        hero->{\n            title,\n            headline,\n            subheadline\n        },\n        sections[]->{\n            title,\n            headline,\n            subheadline,\n            content{\n                content_blocks[]\n            },\n            ctas[]{\n                text,\n                link,\n                icon\n            }\n        }\n    }": Query3Result;
     "*[_id == \"77c1f585-4392-491a-8f21-babe79ed6dfa\"][0]{\n      steps[]{\n        id,\n        next,\n        question,\n        options[]{\n            icon{\n                asset->{\n                    url\n                }\n            },\n            label\n        }\n      }\n    }": Query1Result;
   }
 }

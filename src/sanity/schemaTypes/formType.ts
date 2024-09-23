@@ -8,7 +8,8 @@ export const formType = defineType({
   icon: BillIcon,
   fields: [
     defineField({
-        name: 'title',
+        name: 'internal_title',
+        title: 'Internal Title',
         type: 'string',
       }),
       defineField({

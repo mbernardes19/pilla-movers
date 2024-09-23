@@ -8,7 +8,8 @@ export const pageType = defineType({
   icon: DocumentIcon,
   fields: [
     defineField({
-        name: 'title',
+        name: 'internal_title',
+        title: 'Internal Title',
         type: 'string',
       }),
       defineField({
@@ -19,15 +20,23 @@ export const pageType = defineType({
         },
       }),
       defineField({
+        name: 'hero',
+        title: 'Hero',
+        type: 'reference',
+        to: [{type: 'section'}]
+      }),
+      defineField({
         name: 'sections',
         title: 'Sections',
         type: 'array',
-        of: [defineArrayMember({type: 'reference', to: {type: 'section'}})]
+        of: [
+            defineArrayMember({type: 'reference', to: {type: 'section'}})
+        ]
       }),
   ],
   preview: {
     select: {
-      title: 'title'
+      title: 'internal_title'
     }
   },
 })
