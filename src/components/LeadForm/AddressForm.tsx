@@ -2,9 +2,9 @@
 'use client'
 
 import { useRouter } from "next/navigation"
-import { ChangeEvent, useEffect, useState } from "react"
+import { ChangeEvent, useCallback, useEffect, useState } from "react"
 import { useAddressAutofillCore } from "@mapbox/search-js-react"
-// import _ from 'lodash';
+import _ from 'lodash';
 import { AddressAutofillSuggestion, Autocomplete } from "../Autocomplete/Autocomplete";
 import { setSession } from "@/utils/session";
 
@@ -13,60 +13,55 @@ export const AddressForm = () => {
     const [addressFrom, setAddressFrom] = useState('')
     const [addressTo, setAddressTo] = useState('')
     const autofill = useAddressAutofillCore({ accessToken: process.env.MAPBOX_TOKEN! })
-    const [suggestionsFrom] = useState<AddressAutofillSuggestion[]>([])
-    const [suggestionsTo] = useState<AddressAutofillSuggestion[]>([])
+    const [suggestionsFrom, setSuggestionsFrom] = useState<AddressAutofillSuggestion[]>([])
+    const [suggestionsTo, setSuggestionsTo] = useState<AddressAutofillSuggestion[]>([])
 
     useEffect(() => {
         setSession()
     }, [])
 
-    // useEffect(() => {
-    // })
-
-    // const suggest = async ({ address, type }:{address: string, type: 'from' | 'to'}) => {
-    //     console.log('=== window', typeof window)
-    //     if (typeof window !== 'undefined') {
-    //         const response = await autofill.suggest(address, {
-    //             // sessionToken: localStorage.getItem('session') || '',
-    //             sessionToken: '',
-    //             country: 'us',
-    //             language: 'en',
-    //             proximity: {
-    //                 lat: 40.730610,
-    //                 lng: -73.935242
-    //             }
-    //         })
-    //         if (type === 'from') {
-    //             setSuggestionsFrom(response.suggestions)
-    //         } else {
-    //             setSuggestionsTo(response.suggestions)
-    //         }
-    //     }
-    // }
+    const suggest = async ({ address, type }:{address: string, type: 'from' | 'to'}) => {
+        console.log('=== window', typeof window)
+        if (typeof window !== 'undefined') {
+            const response = await autofill.suggest(address, {
+                // sessionToken: localStorage.getItem('session') || '',
+                sessionToken: '',
+                country: 'us',
+                language: 'en',
+                proximity: {
+                    lat: 40.730610,
+                    lng: -73.935242
+                }
+            })
+            if (type === 'from') {
+                setSuggestionsFrom(response.suggestions)
+            } else {
+                setSuggestionsTo(response.suggestions)
+            }
+        }
+    }
 
     const saveAddresses = () => {
         if (typeof window !== 'undefined') {
-            // sessionStorage.setItem('address_from', addressFrom)
-            // sessionStorage.setItem('address_to', addressTo)
+            sessionStorage.setItem('address_from', addressFrom)
+            sessionStorage.setItem('address_to', addressTo)
             push('/get-a-quote')
         }
     }
 
-    // const debounceOnChange = useCallback(
-    //     _.debounce((value, callback) => {
-    //         callback(value)
-    //     }, 1000), [])
+    const debounceOnChange = useCallback(
+        _.debounce((value, callback) => {
+            callback(value)
+        }, 1000), [])
 
     const handleAddressFromChange = (event: ChangeEvent<HTMLInputElement>) => {
         setAddressFrom(event?.target.value)
-        // suggest({ address: addressFrom, type: 'from'})
-        // debounceOnChange({address: addressFrom, type:'from'}, suggest)
+        debounceOnChange({address: addressFrom, type:'from'}, suggest)
     }
 
     const handleAddressToChange = (event: ChangeEvent<HTMLInputElement>) => {
         setAddressTo(event.target.value)
-        // suggest({ address: addressTo, type: 'to'})
-        // debounceOnChange({address: addressTo, type:'to'}, suggest)
+        debounceOnChange({address: addressTo, type:'to'}, suggest)
     }
 
     useEffect(() => {
