@@ -92,7 +92,9 @@ export const FormProvider: FC<FormProviderProps> = ({ children, steps }) => {
     }
 
     const saveAnswer = (answer: string) => {
-        setAnswer({...answers, [id]: answer.toLowerCase().replaceAll(' ', '-')})
+        console.log('=== save answer', answer)
+        console.log('=== save answer id', id)
+        setAnswer({...answers, [id]: answer})
     }
 
     const value: FormContext = {
@@ -101,6 +103,7 @@ export const FormProvider: FC<FormProviderProps> = ({ children, steps }) => {
         setStepId: setId,
         currentStep,
         answer: (data: string) => {
+            console.log('=== answer data', data)
             saveAnswer(data)
             if (id !== 9) {
                 setId(getNextId(id))
@@ -118,9 +121,9 @@ export const FormProvider: FC<FormProviderProps> = ({ children, steps }) => {
             storage_size: answers[6],
             move_type: answers[7],
             date: answers[8],
-            user_name: JSON.parse(answers[0]).name,
-            user_email: JSON.parse(answers[0]).email,
-            user_phone: JSON.parse(answers[0]).phone,
+            user_name: JSON.parse(answers[9]).name,
+            user_email: JSON.parse(answers[9]).email,
+            user_phone: JSON.parse(answers[9]).phone,
         })
     }
 

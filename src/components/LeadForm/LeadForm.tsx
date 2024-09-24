@@ -23,8 +23,12 @@ const componentMap: Record<number, ComponentType> = {
 }
 
 const LeadFormComponent = () => {
-    const { currentStepId, currentStep } = useForm()
+    const { currentStepId, currentStep, steps } = useForm()
     const CurrentStep = componentMap[currentStepId]
+    console.log('=== steps', steps)
+    console.log('=== currentStepId', currentStepId)
+    console.log('=== currentStep', currentStep)
+    console.log('=== CurrentStep', CurrentStep)
     return (
         <>
             {/* @ts-expect-error Test */}
