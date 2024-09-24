@@ -7,37 +7,49 @@ import { useAddressAutofillCore } from "@mapbox/search-js-react"
 import _ from 'lodash';
 import { AddressAutofillSuggestion, Autocomplete } from "../Autocomplete/Autocomplete";
 import { setSession } from "@/utils/session";
+import { getMapboxToken } from "@/app/getMapboxToken";
 
 export const AddressForm = () => {
     const { push } = useRouter()
     const [addressFrom, setAddressFrom] = useState('')
     const [addressTo, setAddressTo] = useState('')
-    const autofill = useAddressAutofillCore({ accessToken: process.env.MAPBOX_TOKEN! })
+    const [mapboxId, setMapboxId] = useState('')
+    const autofill = useAddressAutofillCore({ accessToken: mapboxId })
     const [suggestionsFrom, setSuggestionsFrom] = useState<AddressAutofillSuggestion[]>([])
     const [suggestionsTo, setSuggestionsTo] = useState<AddressAutofillSuggestion[]>([])
 
     useEffect(() => {
         setSession()
+        const fetchMapboxId = async () => {
+            const token = await getMapboxToken()
+            setMapboxId(token)
+        }
+        fetchMapboxId()
     }, [])
 
     const suggest = async ({ address, type }:{address: string, type: 'from' | 'to'}) => {
-        console.log('=== window', typeof window)
-        if (typeof window !== 'undefined') {
-            const response = await autofill.suggest(address, {
-                // sessionToken: localStorage.getItem('session') || '',
-                sessionToken: '',
-                country: 'us',
-                language: 'en',
-                proximity: {
-                    lat: 40.730610,
-                    lng: -73.935242
-                }
-            })
+        if (!address) {
             if (type === 'from') {
-                setSuggestionsFrom(response.suggestions)
-            } else {
-                setSuggestionsTo(response.suggestions)
+                setSuggestionsFrom([])
             }
+            if (type === 'to') {
+                setSuggestionsFrom([])
+            }
+            return
+        }
+        const response = await autofill.suggest(address, {
+            sessionToken: localStorage.getItem('session') || '',
+            country: 'us',
+            language: 'en',
+            proximity: {
+                lat: 40.730610,
+                lng: -73.935242
+            }
+        })
+        if (type === 'from') {
+            setSuggestionsFrom(response.suggestions)
+        } else {
+            setSuggestionsTo(response.suggestions)
         }
     }
 
@@ -52,16 +64,17 @@ export const AddressForm = () => {
     const debounceOnChange = useCallback(
         _.debounce((value, callback) => {
             callback(value)
-        }, 1000), [])
+        }, 500), [])
 
     const handleAddressFromChange = (event: ChangeEvent<HTMLInputElement>) => {
+        console.log('=== event?.target.value', event?.target.value)
         setAddressFrom(event?.target.value)
-        debounceOnChange({address: addressFrom, type:'from'}, suggest)
+        debounceOnChange({address: event?.target.value, type:'from'}, suggest)
     }
 
     const handleAddressToChange = (event: ChangeEvent<HTMLInputElement>) => {
         setAddressTo(event.target.value)
-        debounceOnChange({address: addressTo, type:'to'}, suggest)
+        debounceOnChange({address: event?.target.value, type:'to'}, suggest)
     }
 
     useEffect(() => {
