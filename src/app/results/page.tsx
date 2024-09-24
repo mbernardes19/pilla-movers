@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { createClient } from "@/utils/db";
 import { notFound } from 'next/navigation';
 
@@ -15,10 +17,8 @@ async function getFormSubsmissionsFromDb(): Promise<any[]|null> {
     }
 }
 
-export default async function Results({ searchParams }) {
+export default async function Results({ searchParams }: { searchParams: Record<string, string>}) {
     const keyParam = searchParams?.key || 'No query param';
-    console.log('=== searchParams', searchParams)
-    console.log('=== keyParam', keyParam)
     if (keyParam !== '123') {
         return notFound()
     }
@@ -28,9 +28,10 @@ export default async function Results({ searchParams }) {
         <div>
             {results?.map((result, idx) => (
                 <div key={idx} className="mb-12">
-                {Object.entries(result).map(([key, val]) => (
-                    <div className={key !== 'id' ? 'ml-8' : 'ml-2'}>
-                        {!result[key] ? null : <h4 className="m-0">{key}</h4>}
+                {Object.entries(result).map(([key, val], idx, arr) => (
+                    <div key={idx} className={key !== 'id' ? 'ml-8' : 'ml-2'}>
+                        {/*  @ts-expect-error */}
+                        {!arr[key] ? null : <h4 className="m-0">{key}</h4>}
                         <p>{val as string}</p>
                     </div>
                 ))}

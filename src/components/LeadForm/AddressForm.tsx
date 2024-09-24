@@ -2,69 +2,71 @@
 'use client'
 
 import { useRouter } from "next/navigation"
-import { useCallback, useEffect, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import { useAddressAutofillCore } from "@mapbox/search-js-react"
-import _ from 'lodash';
-import { Autocomplete } from "../Autocomplete/Autocomplete";
-
-const setSession = () => {
-    if (typeof window !== 'undefined') {
-        if (!localStorage.getItem('session')) {
-            const uuid = crypto.randomUUID()
-            localStorage.setItem('session', uuid)
-        }
-    }
-}
+// import _ from 'lodash';
+import { AddressAutofillSuggestion, Autocomplete } from "../Autocomplete/Autocomplete";
+import { setSession } from "@/utils/session";
 
 export const AddressForm = () => {
     const { push } = useRouter()
     const [addressFrom, setAddressFrom] = useState('')
     const [addressTo, setAddressTo] = useState('')
     const autofill = useAddressAutofillCore({ accessToken: process.env.MAPBOX_TOKEN! })
-    const [suggestionsFrom, setSuggestionsFrom] = useState<any[]>([])
-    const [suggestionsTo, setSuggestionsTo] = useState<any[]>([])
+    const [suggestionsFrom] = useState<AddressAutofillSuggestion[]>([])
+    const [suggestionsTo] = useState<AddressAutofillSuggestion[]>([])
 
-    setSession()
+    useEffect(() => {
+        setSession()
+    }, [])
 
-    const suggest = async ({ address, type }:{address: string, type: 'from' | 'to'}) => {
-        const response = await autofill.suggest(address, {
-            sessionToken: localStorage.getItem('session') || '',
-            country: 'us',
-            language: 'en',
-            proximity: {
-                lat: 40.730610,
-                lng: -73.935242
-            }
-        })
-        if (type === 'from') {
-            setSuggestionsFrom(response.suggestions)
-        } else {
-            setSuggestionsTo(response.suggestions)
-        }
-        
-    }
+    // useEffect(() => {
+    // })
+
+    // const suggest = async ({ address, type }:{address: string, type: 'from' | 'to'}) => {
+    //     console.log('=== window', typeof window)
+    //     if (typeof window !== 'undefined') {
+    //         const response = await autofill.suggest(address, {
+    //             // sessionToken: localStorage.getItem('session') || '',
+    //             sessionToken: '',
+    //             country: 'us',
+    //             language: 'en',
+    //             proximity: {
+    //                 lat: 40.730610,
+    //                 lng: -73.935242
+    //             }
+    //         })
+    //         if (type === 'from') {
+    //             setSuggestionsFrom(response.suggestions)
+    //         } else {
+    //             setSuggestionsTo(response.suggestions)
+    //         }
+    //     }
+    // }
 
     const saveAddresses = () => {
         if (typeof window !== 'undefined') {
-            sessionStorage.setItem('address_from', addressFrom)
-            sessionStorage.setItem('address_to', addressTo)
+            // sessionStorage.setItem('address_from', addressFrom)
+            // sessionStorage.setItem('address_to', addressTo)
             push('/get-a-quote')
         }
     }
 
-    const debounceOnChange = useCallback(
-        _.debounce((value, callback) => {
-            callback(value)
-        }, 1000), [])
+    // const debounceOnChange = useCallback(
+    //     _.debounce((value, callback) => {
+    //         callback(value)
+    //     }, 1000), [])
 
-    const handleAddressFromChange = (event: any) => {
-        setAddressFrom(event.target.value)
-        debounceOnChange({address: addressFrom, type:'from'}, suggest)
+    const handleAddressFromChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setAddressFrom(event?.target.value)
+        // suggest({ address: addressFrom, type: 'from'})
+        // debounceOnChange({address: addressFrom, type:'from'}, suggest)
     }
 
-    const handleAddressToChange = (event: any) => {
+    const handleAddressToChange = (event: ChangeEvent<HTMLInputElement>) => {
         setAddressTo(event.target.value)
-        debounceOnChange({address: addressTo, type:'to'}, suggest)
+        // suggest({ address: addressTo, type: 'to'})
+        // debounceOnChange({address: addressTo, type:'to'}, suggest)
     }
 
     useEffect(() => {
@@ -91,3 +93,5 @@ export const AddressForm = () => {
         </>
     )
 }
+
+export default AddressForm

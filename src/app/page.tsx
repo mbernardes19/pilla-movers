@@ -1,16 +1,29 @@
-import { Hero } from "@/components/Hero/Hero";
-import { AddressForm } from "@/components/LeadForm/AddressForm";
 import { Section } from "@/components/Section/Section";
 import { client } from "@/sanity/lib/client";
 import { defineQuery } from "next-sanity";
 import { Section as SectionType } from "../../sanity.types";
+import dynamic from "next/dynamic";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
+const AddressFormNoSSR = dynamic(
+    () => import("@/components/LeadForm/AddressForm"),
+    { ssr: false, loading: () => <>
+        <Skeleton height={56.25} style={{marginBottom: 12}} />
+        <Skeleton height={56.25} style={{marginBottom: 12}} />
+        <Skeleton width={260} height={56} />
+    </> }
+)
 
 async function getPageBySlug(slug: string) {
     const query3 = defineQuery(`*[_type == "page" && slug.current == $slug][0]{
         title,
         hero->{
             headline,
-            subheadline
+            subheadline,
+            content{
+                content_blocks[]
+            },
         },
         sections[]->{
             title,
@@ -34,9 +47,9 @@ export default async function Home() {
     const pageData = await getPageBySlug('home')
     return (
         <>
-            <Hero data={pageData?.sections?.[0] as SectionType}>
-                <AddressForm />
-            </Hero>
+            <Section data={pageData?.hero as SectionType}>
+                <AddressFormNoSSR />
+            </Section>
             {/*// @ts-expect-error Test */}
             {pageData?.sections?.map((section: SectionType, idx) => (
                 <Section key={idx} data={section} />

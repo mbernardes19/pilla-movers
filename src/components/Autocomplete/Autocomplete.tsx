@@ -46,7 +46,7 @@ export const Autocomplete = ({ suggestions, onSelect }: AutocompleteProps) => {
     }
     
     return (
-        <ul>
+        <ul className={suggestions.length ? 'block' : 'hidden'}>
             {suggestions.map((suggestion, key) => {
                 const address = `${suggestion.address_line1}${ suggestion.address_line2}${ suggestion.address_line3}, ${suggestion.address_level3}, ${suggestion.address_level2}, ${suggestion.address_level1}`
                 return (
