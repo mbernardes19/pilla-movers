@@ -54,7 +54,7 @@ export default async function Home() {
         <>
             <Section
                 id="form"
-                data={pageData?.hero as SectionType}
+                data={pageData?.hero as unknown as SectionType}
                 hero
                 className="hero"
             >

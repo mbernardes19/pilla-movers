@@ -1,6 +1,6 @@
 import { Section } from "@/components/Section/Section";
 import { client } from "@/sanity/lib/client";
-import Image from "next/image";
+import { Page, Section as SectionType } from "../../../sanity.types";
 
 export async function generateStaticParams() {
     const query = `*[_type == "page"]{ "slug": slug.current }`
@@ -35,17 +35,17 @@ async function getPageBySlug(slug: string) {
     const params = { slug }
   
     const page = await client.fetch(query, params)
-    return page
+    return page as Page
   }
 
 export default async function Page({ params }: { params: { slug: string }}) {
     const { slug } = params
-    const { hero, sections } = await getPageBySlug(slug)
+    const { sections } = await getPageBySlug(slug)
     console.log('=== slug', slug)
 
     return (
         <>
-            {sections.map((section, idx) => (
+            {(sections as unknown as SectionType[]).map((section, idx) => (
                <Section key={idx} data={section} /> 
             ))}
         </>
