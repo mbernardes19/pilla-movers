@@ -20,6 +20,9 @@ export default function RootLayout({
         />
         </head>
       <body>
+        <nav className="h-[76px] bg-[#000]">
+
+        </nav>
         {children}
       </body>
     </html>

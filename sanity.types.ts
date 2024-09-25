@@ -39,33 +39,34 @@ export type SanityImageDimensions = {
   aspectRatio?: number;
 };
 
-export type SanityFileAsset = {
-  _id: string;
-  _type: "sanity.fileAsset";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  source?: SanityAssetSourceData;
-};
-
 export type Geopoint = {
   _type: "geopoint";
   lat?: number;
   lng?: number;
   alt?: number;
+};
+
+export type Cta = {
+  _id: string;
+  _type: "cta";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  text?: string;
+  link?: string;
+  icon?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  type?: "primary" | "secondary";
+  publishedAt?: string;
 };
 
 export type Form = {
@@ -164,7 +165,6 @@ export type Section = {
   _updatedAt: string;
   _rev: string;
   internal_title?: string;
-  title?: string;
   headline?: string;
   subheadline?: string;
   mainImage?: {
@@ -178,6 +178,15 @@ export type Section = {
     crop?: SanityImageCrop;
     alt?: string;
     _type: "image";
+  };
+  video_background?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+    };
+    _type: "file";
   };
   content?: {
     render_as?: "cards" | "slider";
@@ -217,23 +226,35 @@ export type Section = {
     }>;
   };
   ctas?: Array<{
-    text?: string;
-    link?: string;
-    icon?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-    _type: "cta";
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
     _key: string;
+    [internalGroqTypeReferenceTo]?: "cta";
   }>;
   publishedAt?: string;
+};
+
+export type SanityFileAsset = {
+  _id: string;
+  _type: "sanity.fileAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  source?: SanityAssetSourceData;
 };
 
 export type BlockContent = Array<{
@@ -324,16 +345,21 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Form | Page | Slug | Section | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Cta | Form | Page | Slug | Section | SanityFileAsset | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/app/page.tsx
 // Variable: query3
-// Query: *[_type == "page" && slug.current == $slug][0]{        title,        hero->{            headline,            subheadline,            content{                content_blocks[]            },        },        sections[]->{            title,            headline,            subheadline,            content{                content_blocks[]            },            ctas[]{                text,                link,                icon            }        }    }
+// Query: *[_type == "page" && slug.current == $slug][0]{        title,        hero->{            headline,            subheadline,            video_background {                asset->{                    url                }            },            content{                content_blocks[]            },        },        sections[]->{            title,            headline,            subheadline,            content{                content_blocks[]            },            ctas[]->{                text,                link,                icon            }        }    }
 export type Query3Result = {
   title: null;
   hero: {
     headline: string | null;
     subheadline: string | null;
+    video_background: {
+      asset: {
+        url: string | null;
+      } | null;
+    } | null;
     content: {
       content_blocks: Array<{
         content?: Array<{
@@ -372,7 +398,7 @@ export type Query3Result = {
     } | null;
   } | null;
   sections: Array<{
-    title: string | null;
+    title: null;
     headline: string | null;
     subheadline: string | null;
     content: {
@@ -483,7 +509,7 @@ export type Query1Result = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"page\" && slug.current == $slug][0]{\n        title,\n        hero->{\n            headline,\n            subheadline,\n            content{\n                content_blocks[]\n            },\n        },\n        sections[]->{\n            title,\n            headline,\n            subheadline,\n            content{\n                content_blocks[]\n            },\n            ctas[]{\n                text,\n                link,\n                icon\n            }\n        }\n    }": Query3Result;
+    "*[_type == \"page\" && slug.current == $slug][0]{\n        title,\n        hero->{\n            headline,\n            subheadline,\n            video_background {\n                asset->{\n                    url\n                }\n            },\n            content{\n                content_blocks[]\n            },\n        },\n        sections[]->{\n            title,\n            headline,\n            subheadline,\n            content{\n                content_blocks[]\n            },\n            ctas[]->{\n                text,\n                link,\n                icon\n            }\n        }\n    }": Query3Result;
     "*[_id == \"77c1f585-4392-491a-8f21-babe79ed6dfa\"][0]{\n      steps[]{\n        id,\n        next,\n        question,\n        options[]{\n            icon{\n                asset->{\n                    url\n                }\n            },\n            label\n        }\n      }\n    }": Query1Result;
   }
 }

@@ -1,0 +1,22 @@
+.hero {
+    @apply flex flex-col justify-center items-center w-screen;
+
+    h1, h2, h3 {
+        @apply text-center;
+    }
+
+    h2 {
+        @apply font-normal;
+    }
+}
+
+.section {
+    @apply relative px-4 py-6 text-center;
+}
+
+.video-overlay {
+    @apply content-[''] absolute w-full h-full bg-black/50 z-[-1];
+}
+.video-background {
+    @apply absolute top-1/2 left-1/2 w-full h-full object-cover translate-x-[-50%] translate-y-[-50%] z-[-2];
+}

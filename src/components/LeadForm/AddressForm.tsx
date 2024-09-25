@@ -8,6 +8,7 @@ import _ from 'lodash';
 import { AddressAutofillSuggestion, Autocomplete } from "../Autocomplete/Autocomplete";
 import { setSession } from "@/utils/session";
 import { getMapboxToken } from "@/app/getMapboxToken";
+import s from './AddressForm.module.scss';
 
 export const AddressForm = () => {
     const { push } = useRouter()
@@ -97,7 +98,10 @@ export const AddressForm = () => {
                     setAddressTo(address)
                 }}
             />
-            <button onClick={saveAddresses}>GET A FREE QUOTE NOW</button>
+            <div className={s['ctas']}>
+                <button onClick={saveAddresses}>GET A FREE QUOTE NOW</button>
+                <button className="secondary">Message Us Now</button>
+            </div>
         </>
     )
 }

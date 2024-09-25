@@ -21,6 +21,11 @@ async function getPageBySlug(slug: string) {
         hero->{
             headline,
             subheadline,
+            video_background {
+                asset->{
+                    url
+                }
+            },
             content{
                 content_blocks[]
             },
@@ -32,7 +37,7 @@ async function getPageBySlug(slug: string) {
             content{
                 content_blocks[]
             },
-            ctas[]{
+            ctas[]->{
                 text,
                 link,
                 icon
@@ -47,7 +52,12 @@ export default async function Home() {
     const pageData = await getPageBySlug('home')
     return (
         <>
-            <Section data={pageData?.hero as SectionType}>
+            <Section
+                id="form"
+                data={pageData?.hero as SectionType}
+                hero
+                className="hero"
+            >
                 <AddressFormNoSSR />
             </Section>
             {/*// @ts-expect-error Test */}

@@ -18,7 +18,7 @@ export const pageType = defineType({
         name: 'slug',
         type: 'slug',
         options: {
-          source: 'title',
+          source: 'internal_title',
         },
       }),
       defineField({

@@ -31,3 +31,12 @@ body {
 [aria-busy=true]:not(input,select,textarea,html)::before {
     content: none !important;
 }
+
+.primary {
+
+}
+
+.secondary {
+    --pico-secondary-background: transparent;
+    --pico-secondary-border: white;
+}

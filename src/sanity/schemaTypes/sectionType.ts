@@ -15,10 +15,6 @@ export const sectionType = defineType({
         type: 'string',
       }),
     defineField({
-        name: 'title',
-        type: 'string',
-      }),
-    defineField({
       name: 'headline',
       type: 'string',
     }),
@@ -39,6 +35,14 @@ export const sectionType = defineType({
             title: 'Alternative text',
           }
         ]
+    }),
+    defineField({
+        name: 'video_background',
+        title: 'Video Background',
+        type: 'file',
+        options: {
+            accept: 'video/*'
+        }
     }),
     defineField({
         name: 'content',
@@ -78,32 +82,13 @@ export const sectionType = defineType({
         ]
     }),
     defineField({
-      name: 'ctas',
-      title: 'CTAs',
-      type: 'array',
-      of: [defineArrayMember({
-        type: 'object',
-        name: 'cta',
-        title: 'CTA',
-        fields: [
-            {
-                name: 'text',
-                type: 'string'
-            },
-            {
-                name: 'link',
-                type: 'url',
-                validation: (Rule) => Rule.uri({
-                    allowRelative: true
-                })
-            },
-            {
-                name: 'icon',
-                type: 'image'
-            }
+        name: 'ctas',
+        title: 'CTAs',
+        type: 'array',
+        of: [
+            defineArrayMember({type: 'reference', to: {type: 'cta'}})
         ]
-    })],
-    }),
+      }),
     defineField({
       name: 'publishedAt',
       type: 'datetime',
