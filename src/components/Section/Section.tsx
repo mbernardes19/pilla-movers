@@ -23,7 +23,7 @@ export const Section = ({ id, data, className, hero, children }: SectionProps) =
             {video_background && (
                 <>
                     <div className={s['video-overlay']} />
-                    <video className={s['video-background']} autoPlay loop muted>
+                    <video className={s['video-background']} autoPlay loop muted playsInline>
                         {/* @ts-expect-error Test */}
                         <source src={video_background.asset?.url} />
                     </video>
