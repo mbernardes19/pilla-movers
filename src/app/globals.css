@@ -1,31 +1,20 @@
 @tailwind base;
 @tailwind components;
+@import "@picocss/pico/css/pico.min.css";
 @tailwind utilities;
 
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --pico-background-color: #0f0147;
 }
 
 .react-loading-skeleton {
     --base-color: #13171f !important;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
 }
 
 [aria-busy=true]:not(input,select,textarea,html)::before {

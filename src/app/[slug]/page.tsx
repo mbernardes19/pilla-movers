@@ -22,6 +22,7 @@ async function getPageBySlug(slug: string) {
             headline,
             subheadline,
             content{
+                render_as,
                 content_blocks[]
             },
             ctas[]->{

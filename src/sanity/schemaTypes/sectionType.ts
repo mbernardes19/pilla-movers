@@ -52,9 +52,10 @@ export const sectionType = defineType({
                 name: 'render_as',
                 title: 'Render As',
                 type: 'string',
-                initialValue: 'cards',
+                initialValue: 'text',
                 options: {
                     list: [
+                        {title: 'Text', value: 'text'},
                         {title: 'Cards', value: 'cards'},
                         {title: 'Slider', value: 'slider'},
                     ]

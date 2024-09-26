@@ -12,11 +12,76 @@
 
 .section {
     @apply relative px-4 py-6 text-center;
+
+    h2 {
+        @apply border-b-2 border-black;
+    }
+
+    .video-overlay {
+        @apply content-[''] absolute w-full h-full bg-black/50 z-[-1];
+    }
+    .video-background {
+        @apply absolute top-1/2 left-1/2 w-full h-full object-cover translate-x-[-50%] translate-y-[-50%] z-[-2];
+    }
+    
+    .cards {
+        @apply flex flex-wrap justify-center items-stretch;
+    }
+    
+    .card {
+        @apply flex-1 bg-white p-4 rounded min-w-[300px] max-w-[600px] min-h-[208px] md:min-h-[256px] m-4 basis-full md:basis-0;
+    }
+
+    .slider {
+        @apply overflow-hidden mb-4;
+
+        .slick-list {
+            @apply overflow-hidden;
+        }
+    }
+
+    .slide {
+        @apply font-bold w-full h-full;
+        @apply flex justify-center items-center;
+
+        .slide-inner {
+            @apply flex justify-center items-center;
+            .content {
+
+            }
+        }
+    }
+
+    .ctas {
+        @apply flex justify-center gap-x-4 mt-4;
+    }
+
+    :global {
+        .slick-dots {
+            @apply relative bottom-auto;
+
+            li {
+                &.slick-active {
+                    button {
+                        &::before {
+                            @apply text-white;
+                        }
+                    }
+                }
+                button {
+                    &::before {
+                        @apply text-white;
+                    }
+                }
+            }
+        }
+    }
 }
 
-.video-overlay {
-    @apply content-[''] absolute w-full h-full bg-black/50 z-[-1];
-}
-.video-background {
-    @apply absolute top-1/2 left-1/2 w-full h-full object-cover translate-x-[-50%] translate-y-[-50%] z-[-2];
+.slider-dots {
+    @apply relative flex justify-center #{!important};
+
+    li {
+        @apply list-none;
+    }
 }

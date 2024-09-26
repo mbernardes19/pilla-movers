@@ -1093,6 +1093,10 @@
                 "of": [
                   {
                     "type": "string",
+                    "value": "text"
+                  },
+                  {
+                    "type": "string",
                     "value": "cards"
                   },
                   {

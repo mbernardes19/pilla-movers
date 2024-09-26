@@ -12,15 +12,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="dark">
         <head>
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
-        />
+        <meta name="color-scheme" content="light" />
         </head>
       <body>
-        <nav className="h-[76px] bg-[#000]">
+        <nav className="h-[76px] bg-[#fff]">
 
         </nav>
         {children}
