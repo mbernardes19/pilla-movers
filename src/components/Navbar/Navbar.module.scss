@@ -1,0 +1,15 @@
+.container {
+    @apply flex h-[86px] w-full md:bg-white justify-between md:justify-start;
+
+    ul {
+        @apply hidden md:flex flex w-full justify-center;
+    }
+}
+
+.mobile-nav {
+    @apply block md:hidden p-0 w-[45px] bg-transparent border-0 pr-4;
+
+    div {
+        @apply w-full h-[4px] bg-white mb-1;
+    }
+}

@@ -54,14 +54,14 @@ export default async function Home() {
     const pageData = await getPageBySlug('home')
     return (
         <>
-            <Section
+            {/* <Section
                 id="form"
                 data={pageData?.hero as unknown as SectionType}
                 hero
                 className="hero"
             >
                 <AddressFormNoSSR />
-            </Section>
+            </Section> */}
             {/*// @ts-expect-error Test */}
             {pageData?.sections?.map((section: SectionType, idx) => (
                 <Section key={idx} data={section} />
