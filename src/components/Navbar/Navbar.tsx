@@ -4,7 +4,7 @@ import s from './Navbar.module.scss';
 export const Navbar = () => {
     return (
         <nav className={s.container}>
-            <img src="/pilla-movers.jpeg" alt="" />
+            <img src="/pilla-movers-2.png" alt="" />
             <ul>
                 <li><a href="/about-us">About Us</a></li>
                 <li><a href="/services">Services</a></li>
@@ -16,6 +16,7 @@ export const Navbar = () => {
                 <div />
                 <div />
             </button>
+            <div className={s['background']}/>
         </nav>
     )
 }

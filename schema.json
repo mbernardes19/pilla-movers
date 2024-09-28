@@ -966,6 +966,23 @@
         },
         "optional": true
       },
+      "background_color": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "primary"
+            },
+            {
+              "type": "string",
+              "value": "secondary"
+            }
+          ]
+        },
+        "optional": true
+      },
       "mainImage": {
         "type": "objectAttribute",
         "value": {
@@ -1102,6 +1119,10 @@
                   {
                     "type": "string",
                     "value": "slider"
+                  },
+                  {
+                    "type": "string",
+                    "value": "testimonials"
                   }
                 ]
               },

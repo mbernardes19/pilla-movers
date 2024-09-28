@@ -17,8 +17,9 @@ export const ctaType = defineType({
         name: 'link',
         type: 'url',
         validation: (Rule) => Rule.uri({
-            allowRelative: true
-        })
+            allowRelative: true,
+            scheme: ['https', 'tel']
+        }),
     }),
     defineField({
         name: 'icon',

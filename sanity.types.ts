@@ -167,6 +167,7 @@ export type Section = {
   internal_title?: string;
   headline?: string;
   subheadline?: string;
+  background_color?: "primary" | "secondary";
   mainImage?: {
     asset?: {
       _ref: string;
@@ -189,7 +190,7 @@ export type Section = {
     _type: "file";
   };
   content?: {
-    render_as?: "text" | "cards" | "slider";
+    render_as?: "text" | "cards" | "slider" | "testimonials";
     content_blocks?: Array<{
       content?: Array<{
         children?: Array<{
@@ -349,7 +350,7 @@ export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/app/page.tsx
 // Variable: query3
-// Query: *[_type == "page" && slug.current == $slug][0]{        title,        hero->{            headline,            subheadline,            video_background {                asset->{                    url                }            },            content{                content_blocks[]            },        },        sections[]->{            title,            headline,            subheadline,            content{                render_as,                content_blocks[]            },            ctas[]->{                text,                link,                icon,                type            }        }    }
+// Query: *[_type == "page" && slug.current == $slug][0]{        title,        hero->{            headline,            subheadline,            video_background {                asset->{                    url                }            },            content{                content_blocks[]            },        },        sections[]->{            title,            headline,            subheadline,            content{                render_as,                content_blocks[]            },            ctas[]->{                text,                link,                icon,                type            },            background_color        }    }
 export type Query3Result = {
   title: null;
   hero: {
@@ -402,7 +403,7 @@ export type Query3Result = {
     headline: string | null;
     subheadline: string | null;
     content: {
-      render_as: "cards" | "slider" | "text" | null;
+      render_as: "cards" | "slider" | "testimonials" | "text" | null;
       content_blocks: Array<{
         content?: Array<{
           children?: Array<{
@@ -454,6 +455,7 @@ export type Query3Result = {
       } | null;
       type: "primary" | "secondary" | null;
     }> | null;
+    background_color: "primary" | "secondary" | null;
   }> | null;
 } | null;
 
@@ -511,7 +513,7 @@ export type Query1Result = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"page\" && slug.current == $slug][0]{\n        title,\n        hero->{\n            headline,\n            subheadline,\n            video_background {\n                asset->{\n                    url\n                }\n            },\n            content{\n                content_blocks[]\n            },\n        },\n        sections[]->{\n            title,\n            headline,\n            subheadline,\n            content{\n                render_as,\n                content_blocks[]\n            },\n            ctas[]->{\n                text,\n                link,\n                icon,\n                type\n            }\n        }\n    }": Query3Result;
+    "*[_type == \"page\" && slug.current == $slug][0]{\n        title,\n        hero->{\n            headline,\n            subheadline,\n            video_background {\n                asset->{\n                    url\n                }\n            },\n            content{\n                content_blocks[]\n            },\n        },\n        sections[]->{\n            title,\n            headline,\n            subheadline,\n            content{\n                render_as,\n                content_blocks[]\n            },\n            ctas[]->{\n                text,\n                link,\n                icon,\n                type\n            },\n            background_color\n        }\n    }": Query3Result;
     "*[_id == \"77c1f585-4392-491a-8f21-babe79ed6dfa\"][0]{\n      steps[]{\n        id,\n        next,\n        question,\n        options[]{\n            icon{\n                asset->{\n                    url\n                }\n            },\n            label\n        }\n      }\n    }": Query1Result;
   }
 }

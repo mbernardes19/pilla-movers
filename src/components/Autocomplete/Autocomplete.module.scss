@@ -1,0 +1,15 @@
+.autocomplete {
+    @apply relative top-[-16px] p-0 bg-[var(--pico-form-element-background-color)] rounded-[var(--pico-border-radius)] w-full;
+    
+    li {
+        @apply list-none w-full;
+
+        button {
+            @apply w-full bg-transparent border-0 p-4;
+
+            &:focus,&:active {
+                @apply bg-[#fff] text-[var(--pico-form-element-background-color)];
+            }
+        }
+    }
+}

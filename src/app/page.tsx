@@ -43,7 +43,8 @@ async function getPageBySlug(slug: string) {
                 link,
                 icon,
                 type
-            }
+            },
+            background_color
         }
     }`)
     const query31 = await client.fetch(query3, { slug })

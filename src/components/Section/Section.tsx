@@ -17,11 +17,18 @@ export type SectionProps = {
 }
 
 export const Section = ({ id, data, className, hero, children }: SectionProps) => {
-    const { headline, subheadline, content, ctas, video_background } = data
+    const { headline, subheadline, content, ctas, video_background, background_color } = data
     return (
         <section
             {...(id ? { id } : { })}
-            className={cn([s[className || '']], s['section'])}
+            className={cn([
+                [s[className || '']],
+                s['section'],
+                {
+                    [s['bg-primary']]: background_color === 'primary',
+                    [s['bg-secondary']]: background_color === 'secondary'
+                }
+            ])}
         >
             {video_background && (
                 <>
@@ -91,6 +98,18 @@ export const Section = ({ id, data, className, hero, children }: SectionProps) =
                         </div>
                     ))}
                 </Slider>
+            )}
+            {content?.render_as === 'testimonials' && (
+                <div className={s['testimonials']}>
+                    {content?.content_blocks?.map((content, idx) => (
+                        <div key={idx} className={s['testimonial']}>
+                            <div className={s['content']}>
+                                {/* @ts-expect-error Tes */}
+                                <PortableText key={idx} value={content?.content} />
+                            </div>
+                        </div>
+                    ))}
+                </div>
             )}
             {children}
             {ctas && (

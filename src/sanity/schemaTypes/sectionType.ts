@@ -23,6 +23,18 @@ export const sectionType = defineType({
         type: 'string',
     }),
     defineField({
+        name: 'background_color',
+        title: 'Background Color',
+        type: 'string',
+        initialValue: 'primary',
+        options: {
+            list: [
+                {title: 'Primary', value: 'primary'},
+                {title: 'Secondary', value: 'secondary'}
+            ]
+        }
+    }),
+    defineField({
         name: 'mainImage',
         type: 'image',
         options: {
@@ -58,6 +70,7 @@ export const sectionType = defineType({
                         {title: 'Text', value: 'text'},
                         {title: 'Cards', value: 'cards'},
                         {title: 'Slider', value: 'slider'},
+                        {title: 'Testimonials', value: 'testimonials'},
                     ]
                 }
             },
