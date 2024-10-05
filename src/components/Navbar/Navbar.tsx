@@ -22,7 +22,7 @@ export const Navbar = ({ pages }: NavbarProps) => {
     return (
         <nav className={s.container}>
             <a href="/">
-                <img src="/pilla-movers-2.png" alt="" />
+                <img src="/pilla-movers-2.webp" alt="" />
             </a>
             <ul>
                 {pages?.map(((page, idx) => (
