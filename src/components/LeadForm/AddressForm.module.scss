@@ -1,3 +1,7 @@
+.container {
+    @apply max-w-[960px] w-full;
+}
+
 .ctas {
     @apply flex flex-col gap-3;
 }

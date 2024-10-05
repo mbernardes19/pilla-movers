@@ -9,6 +9,19 @@ import { AddressAutofillSuggestion, Autocomplete } from "../Autocomplete/Autocom
 import { setSession } from "@/utils/session";
 import { getMapboxToken } from "@/app/getMapboxToken";
 import s from './AddressForm.module.scss';
+import { from, to } from "../../../test/addresses";
+import Skeleton from 'react-loading-skeleton'
+
+const isDebug = process.env.NEXT_PUBLIC_DEBUG === 'true'
+
+export const SkeletonLoader = () => (
+    <div style={{width: '100%'}}>
+        <Skeleton width="100%" height={56.25} style={{marginBottom: 12}} />
+        <Skeleton width="100%" height={56.25} style={{marginBottom: 12}} />
+        <Skeleton width={260} height={56} style={{marginBottom: 12}} />
+        <Skeleton width={260} height={56} style={{marginBottom: 12}} />
+    </div>
+)
 
 export const AddressForm = () => {
     const { push } = useRouter()
@@ -16,8 +29,8 @@ export const AddressForm = () => {
     const [addressTo, setAddressTo] = useState('')
     const [mapboxId, setMapboxId] = useState('')
     const autofill = useAddressAutofillCore({ accessToken: mapboxId })
-    const [suggestionsFrom, setSuggestionsFrom] = useState<AddressAutofillSuggestion[]>([])
-    const [suggestionsTo, setSuggestionsTo] = useState<AddressAutofillSuggestion[]>([])
+    const [suggestionsFrom, setSuggestionsFrom] = useState<AddressAutofillSuggestion[]>(isDebug ? from: [])
+    const [suggestionsTo, setSuggestionsTo] = useState<AddressAutofillSuggestion[]>(isDebug ? to : [])
 
     useEffect(() => {
         setSession()
@@ -71,12 +84,12 @@ export const AddressForm = () => {
     const handleAddressFromChange = (event: ChangeEvent<HTMLInputElement>) => {
         console.log('=== event?.target.value', event?.target.value)
         setAddressFrom(event?.target.value)
-        debounceOnChange({address: event?.target.value, type:'from'}, suggest)
+        if (!isDebug) debounceOnChange({address: event?.target.value, type:'from'}, suggest)
     }
 
     const handleAddressToChange = (event: ChangeEvent<HTMLInputElement>) => {
         setAddressTo(event.target.value)
-        debounceOnChange({address: event?.target.value, type:'to'}, suggest)
+        if (!isDebug) debounceOnChange({address: event?.target.value, type:'to'}, suggest)
     }
 
     useEffect(() => {
@@ -84,7 +97,7 @@ export const AddressForm = () => {
     }, [suggestionsFrom, suggestionsTo])
 
     return (
-        <>
+        <div className={s['container']}>
             <input placeholder="From" value={addressFrom} onChange={handleAddressFromChange} />
             <Autocomplete
                 suggestions={suggestionsFrom}
@@ -103,7 +116,7 @@ export const AddressForm = () => {
                 <button onClick={saveAddresses}>GET A FREE QUOTE NOW</button>
                 <button className="secondary">Message Us Now</button>
             </div>
-        </>
+        </div>
     )
 }
 

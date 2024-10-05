@@ -2,10 +2,10 @@
     @apply relative top-[-16px] p-0 bg-[var(--pico-form-element-background-color)] rounded-[var(--pico-border-radius)] w-full;
     
     li {
-        @apply list-none w-full;
+        @apply list-none w-full flex md:justify-start md:items-start;
 
         button {
-            @apply w-full bg-transparent border-0 p-4;
+            @apply w-full bg-transparent border-0 p-4 md:mx-0 max-w-full text-left;
 
             &:focus,&:active {
                 @apply bg-[#fff] text-[var(--pico-form-element-background-color)];

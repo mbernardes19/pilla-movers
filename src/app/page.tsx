@@ -3,16 +3,12 @@ import { client } from "@/sanity/lib/client";
 import { defineQuery } from "next-sanity";
 import { Section as SectionType } from "../../sanity.types";
 import dynamic from "next/dynamic";
-import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { SkeletonLoader } from "@/components/LeadForm/AddressForm";
 
 const AddressFormNoSSR = dynamic(
     () => import("@/components/LeadForm/AddressForm"),
-    { ssr: false, loading: () => <>
-        <Skeleton height={56.25} style={{marginBottom: 12}} />
-        <Skeleton height={56.25} style={{marginBottom: 12}} />
-        <Skeleton width={260} height={56} />
-    </> }
+    { ssr: false, loading: SkeletonLoader }
 )
 
 async function getPageBySlug(slug: string) {
@@ -61,6 +57,7 @@ export default async function Home() {
                 hero
                 className="hero"
             >
+                {/* <SkeletonLoader /> */}
                 <AddressFormNoSSR />
             </Section>
             {/*// @ts-expect-error Test */}
