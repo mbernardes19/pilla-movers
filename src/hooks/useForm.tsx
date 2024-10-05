@@ -23,7 +23,7 @@ type FormContext = {
     currentStep: Step
     answer: (data: string) => Record<string,string>
     submitAnswers: () => void
-    getLead: (answers?: Record<string, string>) => Lead
+    getLead: (answers?: Record<number, string>) => Lead
 }
 
 export const FormContext = createContext<FormContext>({
@@ -33,7 +33,11 @@ export const FormContext = createContext<FormContext>({
         question: undefined,
         options: undefined
     },
-    answer: () => '',
+    answer: (data: string) => {
+        return {
+            key: data
+        }
+    },
     submitAnswers: () => '',
     getLead: () => ({
         from: '',
@@ -114,7 +118,7 @@ export const FormProvider: FC<FormProviderProps> = ({ children, steps }) => {
             }
         },
         submitAnswers: () => {},
-        getLead: (externalAnswers: string) => {
+        getLead: (externalAnswers?: Record<number, string>) => {
             const answersToProcess = externalAnswers ?? answers
 
             return {

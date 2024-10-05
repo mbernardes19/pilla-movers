@@ -14,6 +14,7 @@ export const UserInfoInput = () => {
     const maskFormat = {
         mask: '(___) ___-____',
         replacement: { '_': /\d/ },
+        // @ts-expect-error Test
         onMask: (ev) => setIsPhoneInputValid(ev.detail.isValid)
     }
     const phoneInputRef = useMask(maskFormat)

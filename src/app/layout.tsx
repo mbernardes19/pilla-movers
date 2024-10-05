@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar/Navbar";
 import { client } from "@/sanity/lib/client";
+import { Navigation, Page } from "../../sanity.types";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,7 +18,7 @@ async function getNavbar() {
     }`
 
     const pages = await client.fetch(getNavbar)
-    return pages as Navigation
+    return pages[0] as Navigation
 }
 
 export default async function RootLayout({
@@ -34,7 +35,7 @@ export default async function RootLayout({
         <meta name="color-scheme" content="light" />
         </head>
       <body>
-        <Navbar pages={result[0].pages} />
+        <Navbar pages={result?.pages as unknown as Page[]} />
         {children}
       </body>
     </html>
