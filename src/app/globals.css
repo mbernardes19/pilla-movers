@@ -29,3 +29,7 @@ body {
     --pico-secondary-background: transparent;
     --pico-secondary-border: white;
 }
+
+input:invalid {
+    border-color: #d90000;
+}

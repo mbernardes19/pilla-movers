@@ -21,9 +21,9 @@ type FormContext = {
     currentStepId: number
     setStepId: Dispatch<SetStateAction<number>>
     currentStep: Step
-    answer: (data: string) => void
+    answer: (data: string) => Record<string,string>
     submitAnswers: () => void
-    getLead: () => Lead
+    getLead: (answers?: Record<string, string>) => Lead
 }
 
 export const FormContext = createContext<FormContext>({
@@ -108,23 +108,31 @@ export const FormProvider: FC<FormProviderProps> = ({ children, steps }) => {
             if (id !== 9) {
                 setId(getNextId(id))
             }
+            return {
+                ...answers,
+                [id]: data
+            }
         },
         submitAnswers: () => {},
-        getLead: () => ({
-            from: JSON.parse(answers[0]).from,
-            to: JSON.parse(answers[0]).to,
-            venue_from: answers[1],
-            venue_to: answers[2],
-            bedrooms: answers[3],
-            people: answers[4],
-            items: answers[5],
-            storage_size: answers[6],
-            move_type: answers[7],
-            date: answers[8],
-            user_name: JSON.parse(answers[9]).name,
-            user_email: JSON.parse(answers[9]).email,
-            user_phone: JSON.parse(answers[9]).phone,
-        })
+        getLead: (externalAnswers: string) => {
+            const answersToProcess = externalAnswers ?? answers
+
+            return {
+                from: JSON.parse(answersToProcess[0]).from,
+                to: JSON.parse(answersToProcess[0]).to,
+                venue_from: answersToProcess[1],
+                venue_to: answersToProcess[2],
+                bedrooms: answersToProcess[3],
+                people: answersToProcess[4],
+                items: answersToProcess[5],
+                storage_size: answersToProcess[6],
+                move_type: answersToProcess[7],
+                date: answersToProcess[8],
+                user_name: JSON.parse(answersToProcess[9]).name,
+                user_email: JSON.parse(answersToProcess[9]).email,
+                user_phone: JSON.parse(answersToProcess[9]).phone,
+            }
+        }
     }
 
     return (
