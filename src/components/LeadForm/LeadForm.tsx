@@ -8,6 +8,7 @@ import { DateInput } from "./DateInput/DateInput"
 import { UserInfoInput } from "./UserInfoInput/UserInfoInput"
 import { PortableText } from "next-sanity"
 import { SuccessScreen } from "./SuccessScreen/SuccessScreen"
+import s from './LeadForm.module.scss'
 
 const componentMap: Record<number, ComponentType> = {
     1: MultipleOptions,
@@ -26,11 +27,11 @@ const LeadFormComponent = () => {
     const { currentStepId, currentStep } = useForm()
     const CurrentStep = componentMap[currentStepId]
     return (
-        <>
+        <div className={s['form-container']}>
             {/* @ts-expect-error Test */}
             <PortableText value={currentStep.question!} />
             <CurrentStep />
-        </>
+        </div>
     )
 }
 

@@ -17,7 +17,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-[aria-busy=true]:not(input,select,textarea,html)::before {
+[aria-busy=true]:not(input,select,button,textarea,html)::before {
     content: none !important;
 }
 

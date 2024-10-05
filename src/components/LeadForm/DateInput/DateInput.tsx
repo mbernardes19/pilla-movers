@@ -2,24 +2,20 @@
 
 import { useForm } from "@/hooks/useForm"
 import { useState } from "react"
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export const DateInput = () => {
     const { answer } = useForm()
-    const [date, setDate] = useState('')
+    const [date, setDate] = useState(new Date())
 
     return (
         <>
             <form onSubmit={(e) => {
                 e.preventDefault()
-                answer(date)
+                answer(date.toISOString().split('T')[0])
             }}>
-                <input
-                    type="date"
-                    onChange={(data) => {
-                        console.log(data)
-                        setDate(data.target.value)
-                    }}
-                />
+                <DatePicker selected={date} minDate={new Date()} onChange={newDate => setDate(newDate!)} />
                 <input type="submit" />
             </form>
         </>

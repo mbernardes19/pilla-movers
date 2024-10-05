@@ -82,7 +82,7 @@
             @apply text-[var(--pico-background-color)];
         }
 
-        .slide {
+        .slide, .card {
             @apply bg-[var(--pico-color)];
         }
     }

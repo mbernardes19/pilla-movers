@@ -3,22 +3,62 @@
     @apply sticky top-0 z-10;
 
     ul {
-        @apply hidden md:flex flex w-full justify-center;
+        @apply hidden md:flex flex w-full justify-center mx-0 #{!important};
     }
 
+    a {
+        @apply text-white no-underline cursor-pointer;
+    }
+
+    a:has(img) {
+        @apply self-center;
+    }
     img {
-        @apply max-w-[10rem] h-fit self-center ml-4;
+        @apply max-w-[10rem] ml-4;
+    }
+
+    .active {
+        @apply block translate-x-0;
     }
 }
 
 .mobile-nav {
-    @apply block md:hidden p-0 w-[45px] bg-transparent border-0 pr-4;
+    --pico-background-color: #0f0147;
+    @apply block md:hidden p-0 w-[62px] bg-transparent border-0 p-4 pr-4 z-20 transition-all duration-500;
+
+    &:hover,&:active,&:focus {
+        --pico-background-color: #0f0147;
+        --pico-box-shadow: 0;
+        @apply bg-transparent
+    }
 
     div {
         @apply w-full h-[4px] bg-white mb-1;
+    }
+
+    &.activeMenu {
+        @apply relative;
+        div {
+            @apply absolute w-[32px] top-[40px] left-1/2 translate-x-[-50%];
+        }
+        div:first-child {
+            @apply rotate-45;
+        }
+        div:not(:first-child) {
+            @apply rotate-[-45deg];
+        }
+        div:last-child {
+            @apply hidden;
+        }
     }
 }
 
 .background {
     @apply absolute opacity-90 bg-[var(--pico-background-color)] w-full h-[86px] z-[-1];
+}
+
+.mobile-menu {
+    ul {
+        @apply flex mt-[5rem] flex-col #{!important};
+    }
 }

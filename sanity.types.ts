@@ -46,6 +46,67 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type Navigation = {
+  _id: string;
+  _type: "navigation";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  internal_title?: string;
+  logo?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  pages?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "page";
+  }>;
+  content_blocks?: Array<{
+    content?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+      listItem?: "bullet";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    } | {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+      _key: string;
+    }>;
+    _type: "content_block";
+    _key: string;
+  }>;
+};
+
 export type Cta = {
   _id: string;
   _type: "cta";
@@ -135,7 +196,7 @@ export type Page = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  internal_title?: string;
+  title?: string;
   slug?: Slug;
   hero?: {
     _ref: string;
@@ -346,13 +407,13 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Cta | Form | Page | Slug | Section | SanityFileAsset | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Navigation | Cta | Form | Page | Slug | Section | SanityFileAsset | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/app/page.tsx
 // Variable: query3
 // Query: *[_type == "page" && slug.current == $slug][0]{        title,        hero->{            headline,            subheadline,            video_background {                asset->{                    url                }            },            content{                content_blocks[]            },        },        sections[]->{            title,            headline,            subheadline,            content{                render_as,                content_blocks[]            },            ctas[]->{                text,                link,                icon,                type            },            background_color        }    }
 export type Query3Result = {
-  title: null;
+  title: string | null;
   hero: {
     headline: string | null;
     subheadline: string | null;

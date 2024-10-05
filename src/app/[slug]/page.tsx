@@ -1,6 +1,6 @@
 import { Section } from "@/components/Section/Section";
 import { client } from "@/sanity/lib/client";
-import { Page, Section as SectionType } from "../../../sanity.types";
+import { Page as PageType, Section as SectionType } from "../../../sanity.types";
 
 export async function generateStaticParams() {
     const query = `*[_type == "page"]{ "slug": slug.current }`
@@ -36,17 +36,17 @@ async function getPageBySlug(slug: string) {
     const params = { slug }
   
     const page = await client.fetch(query, params)
-    return page as Page
+    return page as PageType
   }
 
 export default async function Page({ params }: { params: { slug: string }}) {
     const { slug } = params
-    const { sections } = await getPageBySlug(slug)
-    console.log('=== slug', slug)
+    const page = await getPageBySlug(slug)
+    console.log('=== slug', page)
 
     return (
         <>
-            {(sections as unknown as SectionType[]).map((section, idx) => (
+            {(page?.sections as unknown as SectionType[])?.map((section, idx) => (
                <Section key={idx} data={section} /> 
             ))}
         </>

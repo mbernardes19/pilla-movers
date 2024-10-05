@@ -10,15 +10,15 @@ export const pageType = defineType({
   icon: DocumentIcon,
   fields: [
     defineField({
-        name: 'internal_title',
-        title: 'Internal Title',
+        name: 'title',
+        title: 'Title',
         type: 'string',
       }),
       defineField({
         name: 'slug',
         type: 'slug',
         options: {
-          source: 'internal_title',
+          source: 'title',
         },
       }),
       defineField({
@@ -38,7 +38,7 @@ export const pageType = defineType({
   ],
   preview: {
     select: {
-      title: 'internal_title'
+      title: 'title'
     }
   },
 })
