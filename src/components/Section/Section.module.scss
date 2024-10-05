@@ -1,15 +1,19 @@
 .section {
     @apply relative px-4 py-6 text-center;
 
+    h1, h2, h3, p {
+        @apply max-w-[960px] mx-auto;
+    }
+
     &.hero {
-        @apply flex flex-col justify-center items-center w-screen h-screen;
+        @apply flex flex-col justify-center items-center w-screen min-h-screen md:min-h-[calc(100vh-86px)];
     
         h1, h2, h3 {
             @apply text-center;
         }
     
         h2 {
-            @apply font-normal;
+            @apply font-normal text-xl;
     
             &::after {
                 @apply content-none;
@@ -26,7 +30,7 @@
     }
 
     .video-overlay {
-        @apply content-[''] absolute w-full h-full bg-black/50 z-[-1];
+        @apply content-[''] absolute w-full h-full bg-black/70 z-[-1];
     }
     .video-background {
         @apply absolute top-1/2 left-1/2 w-full h-full object-cover translate-x-[-50%] translate-y-[-50%] z-[-2];

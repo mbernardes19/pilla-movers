@@ -1,5 +1,5 @@
 .container {
-    @apply flex h-[86px] w-full justify-between md:justify-start;
+    @apply flex h-[66px] md:h-[86px] w-full justify-between md:justify-start;
     @apply sticky top-0 z-10;
 
     ul {
@@ -54,7 +54,7 @@
 }
 
 .background {
-    @apply absolute opacity-90 bg-[var(--pico-background-color)] w-full h-[86px] z-[-1];
+    @apply absolute opacity-90 bg-[var(--pico-background-color)] w-full h-[66px] md:h-[86px] z-[-1];
 }
 
 .mobile-menu {

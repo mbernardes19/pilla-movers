@@ -86,6 +86,7 @@ export const Section = ({ id, data, className, hero, children }: SectionProps) =
                     autoplaySpeed={2000}
                     speed={500}
                     dots={true}
+                    pauseOnHover={false}
                 >
                     {content?.content_blocks?.map((content, idx) => (
                         <div key={idx} className={cn([s['slide'], s['card']])}>

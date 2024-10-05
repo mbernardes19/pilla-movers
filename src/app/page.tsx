@@ -9,7 +9,7 @@ import Skeleton from "react-loading-skeleton";
 const AddressFormNoSSR = dynamic(
     () => import("@/components/LeadForm/AddressForm"),
     { ssr: false, loading: () =>
-        <div style={{width: '100%'}}>
+        <div style={{width: '100%', maxWidth: '960px'}}>
             <Skeleton width="100%" height={56.25} style={{marginBottom: 12}} />
             <Skeleton width="100%" height={56.25} style={{marginBottom: 12}} />
             <Skeleton width={260} height={56} style={{marginBottom: 12}} />
