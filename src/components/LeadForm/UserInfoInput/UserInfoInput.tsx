@@ -50,6 +50,7 @@ export const UserInfoInput = () => {
                     required
                 />
                 <input
+                    placeholder="Phone number"
                     ref={phoneInputRef} 
                     type="tel"
                     onChange={(e) => setData({...data, phone: unformat(e.target.value, maskFormat)})}

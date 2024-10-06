@@ -1,3 +1,7 @@
 .form-container {
-    @apply text-center p-6 w-fit mx-auto mt-6 rounded-[var(--pico-border-radius)] bg-[#000];
+    @apply text-center p-6 w-fit mx-auto mt-6 rounded-[var(--pico-border-radius)] bg-[var(--pico-color)];
+
+    h2 {
+        @apply text-[var(--pico-background-color)]
+    }
 }
