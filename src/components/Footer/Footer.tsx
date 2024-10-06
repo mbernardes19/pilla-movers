@@ -2,6 +2,7 @@
 import { PortableText } from 'next-sanity'
 import s from './Footer.module.scss'
 
+// @ts-expect-error Test
 export const Footer = ({ data }) => {
     return (
         <footer className={s['container']}>

@@ -3,7 +3,6 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar/Navbar";
 import { client } from "@/sanity/lib/client";
 import { Navigation, Page } from "../../sanity.types";
-import { Footer } from "@/components/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
