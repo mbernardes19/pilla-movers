@@ -11,11 +11,13 @@ export const Footer = ({ data }) => {
             </div>
             <div>
                 <ul>
+                    {/* @ts-expect-error Test */}
                     {data?.pages?.map(((page, idx) => (
                         <li key={idx}><a href={`/${page.slug?.current}`}>{page.title}</a></li>
                     )))}
                 </ul>
             </div>
+            {/* @ts-expect-error Test */}
             {data.content_blocks.map((content, idx) => (
                     <div key={idx}>
                         <PortableText value={content.content} />
