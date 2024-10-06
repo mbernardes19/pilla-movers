@@ -1,0 +1,7 @@
+.container {
+    @apply flex mx-6 py-12 bg-black;
+
+    img {
+        @apply max-w-[10rem];
+    }
+}
