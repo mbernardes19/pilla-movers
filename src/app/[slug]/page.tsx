@@ -42,7 +42,6 @@ async function getPageBySlug(slug: string) {
 export default async function Page({ params }: { params: { slug: string }}) {
     const { slug } = params
     const page = await getPageBySlug(slug)
-    console.log('=== slug', page)
 
     return (
         <>

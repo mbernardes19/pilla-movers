@@ -45,7 +45,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
     const result = await Promise.all([getNavbar(), getFooter()])
-    console.log('=== pages', result)
 
   return (
     <html lang="en" data-theme="dark">

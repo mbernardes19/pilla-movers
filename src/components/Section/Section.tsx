@@ -7,6 +7,7 @@ import cn from 'classnames'
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import urlBuilder from '@sanity/image-url'
 
 export type SectionProps = {
     data: SectionType
@@ -17,7 +18,8 @@ export type SectionProps = {
 }
 
 export const Section = ({ id, data, className, hero, children }: SectionProps) => {
-    const { headline, subheadline, content, ctas, video_background, background_color } = data
+    const { headline, subheadline, content, ctas, video_background, background_color, mainImage } = data
+
     return (
         <section
             {...(id ? { id } : { })}
@@ -38,8 +40,19 @@ export const Section = ({ id, data, className, hero, children }: SectionProps) =
                         <source src={video_background.asset?.url} />
                     </video>
                 </>
-            )
-                }
+            )}
+            {mainImage && (
+                <>
+                <div className={cn(s['image-overlay'])} />
+                <div
+                    style={{
+                        // @ts-expect-error Test
+                        backgroundImage: `url(${mainImage.asset.url})`
+                    }}
+                    className={`bg-cover bg-top w-full h-full absolute z-[-2] left-0 top-0 opacity-30`}
+                />
+                </>
+            )}
             {hero ? (
                 <>
                     <h1>{headline}</h1>
@@ -69,7 +82,17 @@ export const Section = ({ id, data, className, hero, children }: SectionProps) =
                         <div key={idx} className={s['card']}>
                             <div className={s['content']}>
                                 {/* @ts-expect-error Tes */}
-                                <PortableText key={idx} value={content?.content} />
+                                <PortableText key={idx} value={content?.content} components={{
+                                    types: {
+                                        image: ({value}) => {
+                                            const imageUrl = urlBuilder({
+                                                projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
+                                                dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!
+                                            }).image(value).format('png').url()
+                                            return <img src={imageUrl} className="w-full h-full mb-4" alt=""/>
+                                        }
+                                    }
+                                }} />
                             </div>
                         </div>
                     ))}
@@ -78,15 +101,35 @@ export const Section = ({ id, data, className, hero, children }: SectionProps) =
             {content?.render_as === 'slider' && (
                 <Slider
                     className={s['slider']}
-                    slidesToShow={1}
+                    slidesToShow={4}
                     slidesToScroll={1}
                     swipeToSlide
                     arrows={false}
                     autoplay
-                    autoplaySpeed={2000}
+                    autoplaySpeed={3000}
                     speed={500}
                     dots={true}
                     pauseOnHover={false}
+                    responsive={[
+                        {
+                            breakpoint: 768,
+                            settings: {
+                                slidesToShow: 1
+                            }
+                        },
+                        {
+                            breakpoint: 970,
+                            settings: {
+                                slidesToShow: 2
+                            }
+                        },
+                        {
+                            breakpoint: 1600,
+                            settings: {
+                                slidesToShow: 3
+                            }
+                        }
+                    ]}
                 >
                     {content?.content_blocks?.map((content, idx) => (
                         <div key={idx} className={cn([s['slide'], s['card']])}>

@@ -40,6 +40,11 @@ async function getPageBySlug(slug: string) {
                 render_as,
                 content_blocks[]
             },
+            mainImage {
+                asset->{
+                    url
+                }
+            },
             ctas[]->{
                 text,
                 link,
