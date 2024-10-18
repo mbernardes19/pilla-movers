@@ -85,6 +85,15 @@ export type Navigation = {
         href?: string;
         _type: "link";
         _key: string;
+      } | {
+        reference?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "cta";
+        };
+        _type: "internalLink";
+        _key: string;
       }>;
       level?: number;
       _type: "block";
@@ -105,29 +114,6 @@ export type Navigation = {
     _type: "content_block";
     _key: string;
   }>;
-};
-
-export type Cta = {
-  _id: string;
-  _type: "cta";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  text?: string;
-  link?: string;
-  icon?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  type?: "primary" | "secondary";
-  publishedAt?: string;
 };
 
 export type Form = {
@@ -151,6 +137,15 @@ export type Form = {
       markDefs?: Array<{
         href?: string;
         _type: "link";
+        _key: string;
+      } | {
+        reference?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "cta";
+        };
+        _type: "internalLink";
         _key: string;
       }>;
       level?: number;
@@ -266,6 +261,15 @@ export type Section = {
           href?: string;
           _type: "link";
           _key: string;
+        } | {
+          reference?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "cta";
+          };
+          _type: "internalLink";
+          _key: string;
         }>;
         level?: number;
         _type: "block";
@@ -332,6 +336,15 @@ export type BlockContent = Array<{
     href?: string;
     _type: "link";
     _key: string;
+  } | {
+    reference?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "cta";
+    };
+    _type: "internalLink";
+    _key: string;
   }>;
   level?: number;
   _type: "block";
@@ -349,6 +362,29 @@ export type BlockContent = Array<{
   _type: "image";
   _key: string;
 }>;
+
+export type Cta = {
+  _id: string;
+  _type: "cta";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  text?: string;
+  link?: string;
+  icon?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  type?: "primary" | "secondary";
+  publishedAt?: string;
+};
 
 export type SanityImageCrop = {
   _type: "sanity.imageCrop";
@@ -407,7 +443,7 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Navigation | Cta | Form | Page | Slug | Section | SanityFileAsset | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Navigation | Form | Page | Slug | Section | SanityFileAsset | BlockContent | Cta | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/app/page.tsx
 // Variable: query3
@@ -434,6 +470,15 @@ export type Query3Result = {
           style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
           listItem?: "bullet";
           markDefs?: Array<{
+            reference?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "cta";
+            };
+            _type: "internalLink";
+            _key: string;
+          } | {
             href?: string;
             _type: "link";
             _key: string;
@@ -476,6 +521,15 @@ export type Query3Result = {
           style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
           listItem?: "bullet";
           markDefs?: Array<{
+            reference?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "cta";
+            };
+            _type: "internalLink";
+            _key: string;
+          } | {
             href?: string;
             _type: "link";
             _key: string;
@@ -544,6 +598,15 @@ export type Query1Result = {
       style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
       listItem?: "bullet";
       markDefs?: Array<{
+        reference?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "cta";
+        };
+        _type: "internalLink";
+        _key: string;
+      } | {
         href?: string;
         _type: "link";
         _key: string;

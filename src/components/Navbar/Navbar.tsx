@@ -46,7 +46,7 @@ export const Navbar = ({ pages }: NavbarProps) => {
                 }
             ])}>
                 <div className={cn([
-                    'bg-[#1748FF] z-10 w-2/3 h-screen absolute translate-x-[100%] transition-[all] right-0 duration-150',
+                    'bg-[#1748FF] z-10 w-[45%] h-screen absolute translate-x-[100%] transition-[all] right-0 duration-150',
                     {
                         [s.active]: isOpen
                     },

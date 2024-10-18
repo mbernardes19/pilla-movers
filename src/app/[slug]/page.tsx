@@ -13,25 +13,34 @@ export async function generateStaticParams() {
 
 async function getPageBySlug(slug: string) {
     const query = `*[_type == "page" && slug.current == $slug][0]{
-      hero->{
+    hero->{
         headline,
-        subheadline
-      },
-        sections[]->{
-            title,
-            headline,
-            subheadline,
-            content{
-                render_as,
-                content_blocks[]
-            },
-            ctas[]->{
-                text,
-                link,
-                icon
+        subheadline,
+        video_background {
+            asset->{
+                url
             }
-        }
-    }`
+        },
+        content{
+            content_blocks[]
+        },
+    },
+    sections[]->{
+        title,
+        headline,
+        subheadline,
+        content{
+            render_as,
+            content_blocks[]
+        },
+        ctas[]->{
+            text,
+            link,
+            icon
+        },
+        background_color
+    }
+}`
   
     const params = { slug }
   
@@ -45,6 +54,11 @@ export default async function Page({ params }: { params: { slug: string }}) {
 
     return (
         <>
+            <Section
+                data={page?.hero as unknown as SectionType}
+                hero
+                className="hero-compact"
+            />
             {(page?.sections as unknown as SectionType[])?.map((section, idx) => (
                <Section key={idx} data={section} /> 
             ))}

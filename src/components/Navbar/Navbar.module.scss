@@ -3,7 +3,10 @@
     @apply sticky top-0 z-10;
 
     ul {
-        @apply hidden md:flex flex w-full justify-center mx-0 #{!important};
+        @apply hidden md:flex flex w-full justify-start mx-0 md:pl-10 #{!important};
+        li {
+            @apply md:pl-10;
+        }
     }
 
     a {

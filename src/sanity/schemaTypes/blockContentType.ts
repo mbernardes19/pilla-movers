@@ -54,6 +54,22 @@ export const blockContentType = defineType({
               },
             ],
           },
+          {
+            name: 'internalLink',
+            type: 'object',
+            title: 'Internal link',
+            fields: [
+              {
+                name: 'reference',
+                type: 'reference',
+                title: 'Reference',
+                to: [
+                  { type: 'cta' },
+                  // other types you may want to link to
+                ]
+              }
+            ]
+          }
         ],
       },
     },
@@ -71,6 +87,6 @@ export const blockContentType = defineType({
           title: 'Alternative Text',
         }
       ]
-    },
+    }
   ],
 })

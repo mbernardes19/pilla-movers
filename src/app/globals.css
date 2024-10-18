@@ -3,18 +3,50 @@
 @import "@picocss/pico/css/pico.min.css";
 @tailwind utilities;
 
+@font-face {
+    font-family: 'Roboto';
+    src: url('/fonts/Roboto-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('/fonts/Roboto-Medium.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('/fonts/Roboto-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
 
 :root {
   --pico-background-color: #0f0147;
+  --pico-font-family: 'Roboto', Helvetica, Arial, sans-serif;
 }
+
+/* WebKit and Blink (Chrome, Safari, newer versions of Opera and Edge) */
+  ::-webkit-scrollbar-thumb {
+    background: #fff; /* color of the scroll thumb */
+  }
+  
+  /* Firefox */
+  * {
+    scrollbar-color: #fff #2d2d2d;
+  }
+  
+  /* For Internet Explorer and Edge (older versions) */
+  body {
+    scrollbar-face-color: #888;
+    scrollbar-track-color: #f1f1f1;
+  }
 
 .react-loading-skeleton {
     --base-color: #13171f !important;
-}
-
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 [aria-busy=true]:not(input,select,button,textarea,html)::before {

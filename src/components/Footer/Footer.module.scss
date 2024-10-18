@@ -1,7 +1,23 @@
 .container {
-    @apply flex mx-6 py-12 bg-black;
+    @apply flex justify-center px-12 py-12 bg-[#13171f];
 
     img {
         @apply max-w-[10rem];
+    }
+
+    ul, li {
+        @apply list-none p-0;
+    }
+    a {
+        --pico-color: #c2c7d0;
+        @apply no-underline;
+    }
+
+    .page-links {
+        @apply flex-1;
+    }
+
+    .info {
+        @apply flex-1;
     }
 }

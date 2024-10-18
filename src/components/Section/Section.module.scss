@@ -10,7 +10,7 @@
     }
 
     &.hero {
-        @apply flex flex-col justify-center items-center w-screen min-h-screen md:min-h-[calc(100vh-86px)];
+        @apply flex flex-col justify-center items-center min-h-screen md:min-h-[calc(100vh-86px)];
     
         h1, h2, h3 {
             @apply text-center;
@@ -18,6 +18,22 @@
     
         h2 {
             @apply font-normal text-xl;
+    
+            &::after {
+                @apply content-none;
+            }
+        }
+    }
+
+    &.hero-compact {
+        @apply flex flex-col justify-center items-center;
+    
+        h1, h2, h3 {
+            @apply text-center;
+        }
+    
+        h2 {
+            @apply font-normal text-xl mb-4;
     
             &::after {
                 @apply content-none;

@@ -3,6 +3,7 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar/Navbar";
 import { client } from "@/sanity/lib/client";
 import { Navigation, Page } from "../../sanity.types";
+// import { Footer } from "@/components/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -32,7 +33,26 @@ async function getFooter() {
             slug,
             title
         },
-        content_blocks[]
+                content_blocks[]{
+          content[]{
+            ...,
+             markDefs[]{
+                ...,
+               _type == 'internalLink' => {
+                ...,
+                 "cta": @.reference->{
+                    text,
+                    link,
+                    icon {
+                        asset->{
+                            url
+                        }
+                    }
+                 }
+               }
+             }   
+          }
+        }
     }`
 
     const pages = await client.fetch(getNavbar)
@@ -45,7 +65,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
     const result = await Promise.all([getNavbar(), getFooter()])
-
   return (
     <html lang="en" data-theme="dark">
         <head>
