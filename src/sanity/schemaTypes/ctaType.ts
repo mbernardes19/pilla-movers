@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
-import {BlockElementIcon} from '@sanity/icons'
+import {CheckmarkCircleIcon} from '@sanity/icons'
 import {defineField, defineType} from 'sanity'
 
 export const ctaType = defineType({
   name: 'cta',
   title: 'CTA',
   type: 'document',
-  icon: BlockElementIcon,
+  icon: CheckmarkCircleIcon,
   fields: [
     defineField({
         name: 'text',
@@ -20,6 +20,11 @@ export const ctaType = defineType({
             allowRelative: true,
             scheme: ['http', 'https', 'tel', 'mailto']
         }),
+    }),
+    defineField({
+        name: 'iconOnly',
+        title: 'Display only the icon',
+        type: 'boolean'
     }),
     defineField({
         name: 'icon',

@@ -1,0 +1,6 @@
+.link {
+    @apply flex md:flex-row flex-col items-center justify-center md:justify-start;
+    img {
+        @apply w-6 md:mr-2;
+    }
+}

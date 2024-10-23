@@ -82,7 +82,6 @@ export const AddressForm = () => {
         }, 500), [])
 
     const handleAddressFromChange = (event: ChangeEvent<HTMLInputElement>) => {
-        console.log('=== event?.target.value', event?.target.value)
         setAddressFrom(event?.target.value)
         if (!isDebug) debounceOnChange({address: event?.target.value, type:'from'}, suggest)
     }

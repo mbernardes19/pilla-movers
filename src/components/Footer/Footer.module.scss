@@ -1,8 +1,11 @@
 .container {
-    @apply flex justify-center px-12 py-12 bg-[#13171f];
+    @apply flex flex-col flex-wrap md:flex-row items-center justify-center md:items-start px-12 py-12 bg-[#13171f] gap-x-8;
 
-    img {
-        @apply max-w-[10rem];
+    .logo {
+        @apply w-full flex-1 text-center md:text-left;
+        img {
+            @apply max-w-[15rem] mb-8;
+        }
     }
 
     ul, li {
@@ -14,10 +17,15 @@
     }
 
     .page-links {
-        @apply flex-1;
+        @apply w-full flex-1 text-center md:text-left;
     }
 
     .info {
-        @apply flex-1;
+        @apply w-full flex-1 text-center md:text-left;
+
+
+    img {
+        @apply max-w-[10rem];
+    }
     }
 }

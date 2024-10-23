@@ -4,6 +4,7 @@
 import { PortableText } from 'next-sanity'
 import s from './Footer.module.scss'
 import { usePathname } from 'next/navigation';
+import { CtaLink } from '../CtaLink/CtaLink';
 
 
 // @ts-expect-error Test
@@ -16,7 +17,11 @@ export const Footer = ({ data }) => {
 
     return (
         <footer className={s['container']}>
+            <div className={s['logo']}>
+                <img src={data.logo.asset.url} />
+            </div>
             <div className={s['page-links']}>
+                <h4>Quick links</h4>
                 <ul>
                     {/* @ts-expect-error Test */}
                     {data?.pages?.map(((page, idx) => (
@@ -29,15 +34,15 @@ export const Footer = ({ data }) => {
                 <div key={idx} className={s['info']}>
                     <PortableText
                         components={{
-                            marks: {
-                                internalLink: ({ value }) => {
-                                    const { cta: { link, icon: { asset: { url }} } } = value
+                            types: {
+                                image: ({ value }) => {
                                     return (
-                                        <a href={link}>
-                                            <img src={url} alt="" />
-                                        </a>
+                                        <img src={value.asset.url} alt=""/>
                                     )
-                            }
+                                }
+                            },
+                            marks: {
+                                ctaLink: ({ value }) => <CtaLink {...value.cta} />
                             }
                         }}
                         value={content.content}

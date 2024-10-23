@@ -1,5 +1,5 @@
 import {defineType} from 'sanity'
-import {ImageIcon} from '@sanity/icons'
+import {ImageIcon, AddDocumentIcon} from '@sanity/icons'
 
 /**
  * This is the schema type for block content used in the post document type
@@ -55,17 +55,17 @@ export const blockContentType = defineType({
             ],
           },
           {
-            name: 'internalLink',
+            name: 'ctaLink',
             type: 'object',
-            title: 'Internal link',
+            title: 'CTA Link',
+            icon: AddDocumentIcon,
             fields: [
               {
                 name: 'reference',
                 type: 'reference',
                 title: 'Reference',
                 to: [
-                  { type: 'cta' },
-                  // other types you may want to link to
+                  { type: 'cta' }
                 ]
               }
             ]

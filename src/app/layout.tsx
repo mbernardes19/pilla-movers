@@ -3,7 +3,7 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar/Navbar";
 import { client } from "@/sanity/lib/client";
 import { Navigation, Page } from "../../sanity.types";
-// import { Footer } from "@/components/Footer/Footer";
+import { Footer } from "@/components/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -36,9 +36,12 @@ async function getFooter() {
                 content_blocks[]{
           content[]{
             ...,
+            asset->{
+                url
+            },
              markDefs[]{
                 ...,
-               _type == 'internalLink' => {
+               _type == 'ctaLink' => {
                 ...,
                  "cta": @.reference->{
                     text,
@@ -47,7 +50,8 @@ async function getFooter() {
                         asset->{
                             url
                         }
-                    }
+                    },
+                    iconOnly
                  }
                }
              }   
@@ -73,7 +77,7 @@ export default async function RootLayout({
       <body>
         <Navbar pages={result?.[0]?.pages as unknown as Page[]} />
         {children}
-        {/* <Footer data={result?.[1]} /> */}
+        <Footer data={result?.[1]} />
       </body>
     </html>
   );

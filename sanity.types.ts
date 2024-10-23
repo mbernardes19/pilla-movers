@@ -92,7 +92,7 @@ export type Navigation = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "cta";
         };
-        _type: "internalLink";
+        _type: "ctaLink";
         _key: string;
       }>;
       level?: number;
@@ -112,6 +112,49 @@ export type Navigation = {
       _key: string;
     }>;
     _type: "content_block";
+    _key: string;
+  }>;
+  bottom_contents?: Array<{
+    content?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+      listItem?: "bullet";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      } | {
+        reference?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "cta";
+        };
+        _type: "ctaLink";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    } | {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+      _key: string;
+    }>;
+    _type: "bottom_content";
     _key: string;
   }>;
 };
@@ -145,7 +188,7 @@ export type Form = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "cta";
         };
-        _type: "internalLink";
+        _type: "ctaLink";
         _key: string;
       }>;
       level?: number;
@@ -268,7 +311,7 @@ export type Section = {
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "cta";
           };
-          _type: "internalLink";
+          _type: "ctaLink";
           _key: string;
         }>;
         level?: number;
@@ -343,7 +386,7 @@ export type BlockContent = Array<{
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "cta";
     };
-    _type: "internalLink";
+    _type: "ctaLink";
     _key: string;
   }>;
   level?: number;
@@ -371,6 +414,7 @@ export type Cta = {
   _rev: string;
   text?: string;
   link?: string;
+  iconOnly?: boolean;
   icon?: {
     asset?: {
       _ref: string;
@@ -476,7 +520,7 @@ export type Query3Result = {
               _weak?: boolean;
               [internalGroqTypeReferenceTo]?: "cta";
             };
-            _type: "internalLink";
+            _type: "ctaLink";
             _key: string;
           } | {
             href?: string;
@@ -527,7 +571,7 @@ export type Query3Result = {
               _weak?: boolean;
               [internalGroqTypeReferenceTo]?: "cta";
             };
-            _type: "internalLink";
+            _type: "ctaLink";
             _key: string;
           } | {
             href?: string;
@@ -604,7 +648,7 @@ export type Query1Result = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "cta";
         };
-        _type: "internalLink";
+        _type: "ctaLink";
         _key: string;
       } | {
         href?: string;

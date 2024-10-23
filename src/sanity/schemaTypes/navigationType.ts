@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
-import {DocumentIcon} from '@sanity/icons'
+import {PanelRightIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 
 export const navigationType = defineType({
   name: 'navigation',
   title: 'Navigation',
   type: 'document',
-  icon: DocumentIcon,
+  icon: PanelRightIcon,
   fields: [
     defineField({
         name: 'internal_title',
@@ -35,6 +35,25 @@ export const navigationType = defineType({
             type: 'object',
             name: 'content_block',
             title: 'Content Block',
+            fields: [{
+                name: 'content',
+                type: 'blockContent',
+            }],
+            preview: {
+                select: {
+                    title: 'content'
+                }
+            }
+        })]
+    }),
+    defineField({
+        name: 'bottom_contents',
+        title: 'Bottom Content',
+        type: 'array',
+        of: [defineArrayMember({
+            type: 'object',
+            name: 'bottom_content',
+            title: 'Bottom Content',
             fields: [{
                 name: 'content',
                 type: 'blockContent',
