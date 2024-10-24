@@ -157,3 +157,12 @@
         @apply list-none;
     }
 }
+
+.secondary-2 {
+    color: #0f0147 !important;
+    border-color: #0f0147;
+
+    &:hover {
+        border-color: var(--pico-secondary-hover-border);
+    }
+}

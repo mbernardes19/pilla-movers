@@ -31,6 +31,9 @@ async function getPageBySlug(slug: string) {
             content{
                 content_blocks[]
             },
+            ctas[]->{
+                link
+            },
         },
         sections[]->{
             title,
@@ -68,7 +71,7 @@ export default async function Home() {
                 hero
                 className="hero"
             >
-                <AddressFormNoSSR />
+                <AddressFormNoSSR ctas={pageData.hero.ctas} />
             </Section>
             {/*// @ts-expect-error Test */}
             {pageData?.sections?.map((section: SectionType, idx) => (

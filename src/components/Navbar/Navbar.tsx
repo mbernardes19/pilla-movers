@@ -11,6 +11,10 @@ export type NavbarProps = {
     pages: Page[]
 }
 
+const processLinks = (link: string) => {
+    return link === 'home' ? '/' : `/${link}`
+}
+
 export const Navbar = ({ pages }: NavbarProps) => {
     const pathname = usePathname()
     const [isOpen, setIsOpen] = useState(false)
@@ -26,15 +30,18 @@ export const Navbar = ({ pages }: NavbarProps) => {
             </a>
             <ul>
                 {pages?.map(((page, idx) => (
-                    <li key={idx}><a href={`/${page.slug?.current}`}>{page.title}</a></li>
+                    <li key={idx}><a href={processLinks(page.slug?.current ?? '')}>{page.title}</a></li>
                 )))}
             </ul>
-            <button className={cn([
-                s['mobile-nav'],
-                {
-                    [s.activeMenu]: isOpen
-                }
-            ])} onClick={() => setIsOpen(!isOpen)}>
+            <button
+                className={cn([
+                    s['mobile-nav'],
+                    {
+                        [s.activeMenu]: isOpen
+                    }
+                ])}
+                onClick={() => setIsOpen(!isOpen)}
+            >
                 <div />
                 <div />
                 <div />
@@ -54,7 +61,7 @@ export const Navbar = ({ pages }: NavbarProps) => {
                 ])}>
                     <ul>
                         {pages?.map(((page, idx) => (
-                            <li key={idx}><a href={`/${page.slug?.current}`}>{page.title}</a></li>
+                            <li key={idx}><a href={processLinks(page.slug?.current ?? '')}>{page.title}</a></li>
                         )))}
                     </ul>
                 </div>

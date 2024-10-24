@@ -1,7 +1,11 @@
 .container {
     @apply max-w-[960px] w-full;
+
+    input {
+        @apply mb-0 pl-10;
+    }
 }
 
 .ctas {
-    @apply flex flex-col gap-3;
+    @apply flex flex-col gap-3 w-fit mx-auto;
 }

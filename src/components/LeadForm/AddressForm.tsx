@@ -11,6 +11,9 @@ import { getMapboxToken } from "@/app/getMapboxToken";
 import s from './AddressForm.module.scss';
 import { from, to } from "../../../test/addresses";
 import Skeleton from 'react-loading-skeleton'
+import { WhatsappIcon } from "../icons/Whatsapp";
+import { Cta } from "../../../sanity.types";
+import { MapPin } from "../icons/Pin";
 
 const isDebug = process.env.NEXT_PUBLIC_DEBUG === 'true'
 
@@ -23,7 +26,11 @@ export const SkeletonLoader = () => (
     </div>
 )
 
-export const AddressForm = () => {
+export type AddressFormProps = {
+    ctas: Cta[]
+}
+
+export const AddressForm = ({ ctas }: AddressFormProps) => {
     const { push } = useRouter()
     const [addressFrom, setAddressFrom] = useState('')
     const [addressTo, setAddressTo] = useState('')
@@ -91,29 +98,39 @@ export const AddressForm = () => {
         if (!isDebug) debounceOnChange({address: event?.target.value, type:'to'}, suggest)
     }
 
-    useEffect(() => {
-        console.log(suggestionsFrom, suggestionsTo)
-    }, [suggestionsFrom, suggestionsTo])
-
     return (
         <div className={s['container']}>
-            <input placeholder="From" value={addressFrom} onChange={handleAddressFromChange} />
-            <Autocomplete
-                suggestions={suggestionsFrom}
-                onSelect={(address) => {
-                    setAddressFrom(address)
-                }}
-            />
-            <input placeholder="To" value={addressTo} onChange={handleAddressToChange} />
-            <Autocomplete
-                suggestions={suggestionsTo}
-                onSelect={(address) => {
-                    setAddressTo(address)
-                }}
-            />
+            <div className="flex flex-col gap-y-4 mb-4">
+                <div className="relative">
+                    <MapPin className="absolute ml-2 top-1/2 translate-y-[-50%]" width="30px" />
+                    <input placeholder="From" value={addressFrom} onChange={handleAddressFromChange} />
+                </div>
+                <Autocomplete
+                    suggestions={suggestionsFrom}
+                    onSelect={(address) => {
+                        setAddressFrom(address)
+                    }}
+                />
+                <div className="relative">
+                    <MapPin className="absolute ml-2 top-1/2 translate-y-[-50%]" width="30px" />
+                    <input placeholder="To" value={addressTo} onChange={handleAddressToChange} />
+                </div>
+                <Autocomplete
+                    suggestions={suggestionsTo}
+                    onSelect={(address) => {
+                        setAddressTo(address)
+                    }}
+                />
+            </div>
             <div className={s['ctas']}>
                 <button onClick={saveAddresses}>GET A FREE QUOTE NOW</button>
-                <button className="secondary">Message Us Now</button>
+                <button
+                    className="flex justify-center items-center secondary w-full"
+                    onClick={() => push(ctas?.[0]?.link ?? '')}
+                >
+                    <WhatsappIcon width="32px"/>
+                    <span className="ml-2">Message Us Now</span>
+                </button>
             </div>
         </div>
     )

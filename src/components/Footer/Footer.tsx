@@ -6,6 +6,9 @@ import s from './Footer.module.scss'
 import { usePathname } from 'next/navigation';
 import { CtaLink } from '../CtaLink/CtaLink';
 
+const processLinks = (link: string) => {
+    return link === 'home' ? '/' : `/${link}`
+}
 
 // @ts-expect-error Test
 export const Footer = ({ data }) => {
@@ -25,7 +28,7 @@ export const Footer = ({ data }) => {
                 <ul>
                     {/* @ts-expect-error Test */}
                     {data?.pages?.map(((page, idx) => (
-                        <li key={idx}><a href={`/${page.slug?.current}`}>{page.title}</a></li>
+                        <li key={idx}><a href={processLinks(page.slug?.current)}>{page.title}</a></li>
                     )))}
                 </ul>
             </div>

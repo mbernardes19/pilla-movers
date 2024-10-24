@@ -2,6 +2,7 @@ import { LeadForm } from "@/components/LeadForm/LeadForm";
 import { Step } from "@/hooks/useForm";
 import { client } from "@/sanity/lib/client";
 import { defineQuery } from "next-sanity";
+import s from './GetAQuote.module.scss'
 
 async function getFormSteps(): Promise<Step[]> {
     const query1 = defineQuery(`*[_id == "77c1f585-4392-491a-8f21-babe79ed6dfa"][0]{
@@ -28,7 +29,7 @@ export default async function GetAQuote() {
     const steps = await getFormSteps()
     
     return (
-        <div>
+        <div className={s['container']}>
             <LeadForm steps={steps} />
         </div>
     );

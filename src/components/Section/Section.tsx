@@ -157,12 +157,20 @@ export const Section = ({ id, data, className, hero, children }: SectionProps) =
                 </div>
             )}
             {children}
-            {ctas && (
+            {ctas && !hero && (
                 <div className={s['ctas']}>
                     {ctas?.map((sectionCta, idx) => {
                         const cta = sectionCta as unknown as Cta
-                        {/* @ts-expect-error Test */}
-                        return <a role="button" key={idx} href={cta.link} className={cta.type}>{cta.icon && cta.icon}{cta.text}</a>
+                        return (
+                        <a
+                            role="button"
+                            key={idx}
+                            href={cta.link}
+                            className={background_color === 'secondary' && cta.type === 'secondary' ? `secondary ${s['secondary-2']}` : cta.type }
+                            >
+                                {cta.text}
+                            </a>
+                        )
                     })}
                 </div>
             )}

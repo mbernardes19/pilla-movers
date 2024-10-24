@@ -36,7 +36,8 @@ async function getPageBySlug(slug: string) {
         ctas[]->{
             text,
             link,
-            icon
+            icon,
+            type
         },
         background_color
     }

@@ -11,6 +11,10 @@
 
     a {
         @apply text-white no-underline cursor-pointer;
+
+        &:hover {
+            @apply text-[var(--pico-primary-hover)];
+        }
     }
 
     a:has(img) {
@@ -63,5 +67,17 @@
 .mobile-menu {
     ul {
         @apply flex mt-[5rem] flex-col #{!important};
+
+        li {
+            @apply w-full text-center relative px-0;
+
+            &:after {
+                @apply absolute content-[''] w-2/3 h-[1px] bg-[#fff] bottom-0 left-1/2 translate-x-[-50%];
+            }
+
+            a {
+                @apply w-full py-4;
+            }
+        }
     }
 }

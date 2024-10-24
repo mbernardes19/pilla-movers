@@ -65,11 +65,11 @@ const stepsMap = (answers: Record<number, string>): Record<number, number | (()=
     1: 2,
     2: () => {
         switch (answers[1]) {
-            case 'office':
+            case 'Office':
                 return 4
-            case 'business':
+            case 'Business':
                 return 5
-            case 'storage':
+            case 'Storage':
                 return 6
             default:
                 return 3
