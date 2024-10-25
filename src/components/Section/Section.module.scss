@@ -100,7 +100,7 @@
     }
 
     .slide {
-        @apply font-bold w-full h-full;
+        @apply font-bold w-full h-full md:min-h-[304.5px];
         @apply flex justify-center items-center #{!important};
 
         .slide-inner {
