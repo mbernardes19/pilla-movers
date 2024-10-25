@@ -71,7 +71,7 @@ export default async function Home() {
                 hero
                 className="hero"
             >
-                <AddressFormNoSSR ctas={pageData.hero.ctas} />
+                <AddressFormNoSSR ctas={pageData?.hero?.ctas as {link: string}[]} />
             </Section>
             {/*// @ts-expect-error Test */}
             {pageData?.sections?.map((section: SectionType, idx) => (

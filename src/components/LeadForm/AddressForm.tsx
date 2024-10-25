@@ -12,7 +12,6 @@ import s from './AddressForm.module.scss';
 import { from, to } from "../../../test/addresses";
 import Skeleton from 'react-loading-skeleton'
 import { WhatsappIcon } from "../icons/Whatsapp";
-import { Cta } from "../../../sanity.types";
 import { MapPin } from "../icons/Pin";
 
 const isDebug = process.env.NEXT_PUBLIC_DEBUG === 'true'
@@ -27,7 +26,7 @@ export const SkeletonLoader = () => (
 )
 
 export type AddressFormProps = {
-    ctas: Cta[]
+    ctas: {link: string}[]
 }
 
 export const AddressForm = ({ ctas }: AddressFormProps) => {
